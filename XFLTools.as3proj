@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <output>
+    <movie path="bin-debug/XFLTools.swf"/>
+    <movie width="800"/>
+    <movie fps="60"/>
+    <movie height="600"/>
+    <movie platform="Flash Player"/>
+    <movie version="11"/>
+    <movie disabled="False"/>
+    <movie background="#FFFFFF"/>
+    <movie input=""/>
+  </output>
+  &lt;!-- Other classes to be compiled into your SWF --&gt;
+  <classpaths>
+    <class path="src"/>
+    <class path="as-src"/>
+  </classpaths>
+  <moonshineResourcePaths>
+    <class path="js-src"/>
+    <class path="xfls"/>
+  </moonshineResourcePaths>
+  <moonshineNativeExtensionPaths></moonshineNativeExtensionPaths>
+  <build>
+    <option es="False"/>
+    <option showActionScriptWarnings="True"/>
+    <option staticLinkRSL="False"/>
+    <option showBindingWarnings="True"/>
+    <option compilerConstants=""/>
+    <option showDeprecationWarnings="True"/>
+    <option antBuildPath="build/build.xml"/>
+    <option showUnusedTypeSelectorWarnings="True"/>
+    <option customSDK="C:\Users\Tim\Documents\SDKs\apache-royale-0.9.4-bin-js-swf\royale-asjs"/>
+    <option locale=""/>
+    <option accessible="False"/>
+    <option additional=""/>
+    <option allowSourcePathOverlap="False"/>
+    <option useResourceBundleMetadata="True"/>
+    <option strict="True"/>
+    <option warnings="True"/>
+    <option useNetwork="True"/>
+    <option verboseStackTraces="False"/>
+    <option loadConfig=""/>
+    <option linkReport=""/>
+    <option benchmark="False"/>
+    <option optimize="False"/>
+  </build>
+  <includeLibraries></includeLibraries>
+  <libraryPaths></libraryPaths>
+  <externalLibraryPaths></externalLibraryPaths>
+  <rslPaths></rslPaths>
+  <intrinsics>
+    <element path="Library/AS3/frameworks/Flex4"/>
+    <element path="Library\AS3\frameworks\Flex4"/>
+  </intrinsics>
+  <library></library>
+  <compileTargets>
+    <compile path="src/XFLTools.mxml"/>
+  </compileTargets>
+  <hiddenPaths></hiddenPaths>
+  <preBuildCommand>null</preBuildCommand>
+  <postBuildCommand alwaysRun="False">null</postBuildCommand>
+  <options>
+    <option showHiddenPaths="False"/>
+    <option testMovie=""/>
+    <option testMovieCommand=""/>
+    <option defaultBuildTargets=""/>
+    <option isExportedToExistingSource="False"/>
+    <option visualEditorExportPath=""/>
+    <option isPrimeFacesVisualEditor="False"/>
+  </options>
+  <moonshineRunCustomization>
+    <option projectType="2"/>
+    <option launchMethod="Simulator"/>
+    <option targetPlatform="2"/>
+    <option urlToLaunch="C:\Users\Tim\Documents\projects\XFLTools\bin\js-debug\index.html"/>
+    <option deviceSimulator="null"/>
+    <deviceSimulator>null</deviceSimulator>
+    <certAndroid>null</certAndroid>
+    <certIos>null</certIos>
+    <certIosProvisioning>null</certIosProvisioning>
+  </moonshineRunCustomization>
+</project>
