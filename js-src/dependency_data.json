@@ -1,0 +1,14 @@
+[
+	{
+		"class": "flash.events.EventDispatcher",
+		"dependencies": ["org.xfltools.core.FlashJSObject", "flash.events.IEventDispatcher", "org.apache.royale.utils.Language"]
+	},
+	{
+		"class": "com.greensock.TweenLite",
+		"dependencies": ["flash.display.Shape"]
+	},
+	{
+		"class": "flash.display.Sprite",
+		"dependencies": ["flash.display.Graphics"]
+	}
+]

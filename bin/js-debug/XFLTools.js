@@ -61,6 +61,7 @@ goog.require('org.apache.royale.geom.Point');
 goog.require('flash.text.TextSnapshot');
 goog.require('org.apache.royale.events.utils.MouseEventConverter');
 goog.require('org.apache.royale.effects.Effect');
+goog.require('org.xfltools.xfldom.DOMLibrary');
 goog.require('flash.display.Scene');
 goog.require('org.apache.royale.core.IBeadModel');
 goog.require('org.xfltools.xfldom.DOMSymbolItem');

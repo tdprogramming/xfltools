@@ -12,7 +12,7 @@ package org.xfltools.xfldom
 	{
 		private static const XML_NODE_NAME_TO_CLASS:Dictionary = generateXMLNodeNameToClass();
 		
-		private static var _domLibrary:DOMLibrary = new DOMLibrary();
+		private static var _domLibrary:DOMLibrary;
 		
 		public static function getDOMComponentArray(xml:XML, nodeNames:Array, clazz:Class = null):Array
 		{
@@ -43,6 +43,7 @@ package org.xfltools.xfldom
 				symbolURLs.push(rootFolderURL + "/LIBRARY/" + symbolXML.@href);
 			}
 			
+			_domLibrary = new DOMLibrary();
 			_domLibrary.addEventListener(Event.COMPLETE, loadedCallback);
 			_domLibrary.load(symbolURLs);
 		}

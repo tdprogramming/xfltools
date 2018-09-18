@@ -8,14 +8,13 @@
  */
 
 goog.provide('org.xfltools.xfldom.DOMComponentFactory');
-/* Royale Dependency List: XML,flash.events.Event,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.IDOMComponent*/
-/* Royale Static Dependency List: org.xfltools.xfldom.DOMComponentFactory,flash.utils.Dictionary,org.xfltools.xfldom.DOMXMLNodeName,org.xfltools.xfldom.DOMDocument,org.xfltools.xfldom.DOMFrame,org.xfltools.xfldom.DOMLayer,org.xfltools.xfldom.DOMShape,org.xfltools.xfldom.DOMSymbolInstance,org.xfltools.xfldom.DOMTimeline,org.xfltools.xfldom.MotionObject,org.xfltools.xfldom.DOMLibrary*/
+/* Royale Dependency List: XML,flash.events.Event,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.DOMLibrary,org.xfltools.xfldom.IDOMComponent*/
+/* Royale Static Dependency List: org.xfltools.xfldom.DOMComponentFactory,flash.utils.Dictionary,org.xfltools.xfldom.DOMXMLNodeName,org.xfltools.xfldom.DOMDocument,org.xfltools.xfldom.DOMFrame,org.xfltools.xfldom.DOMLayer,org.xfltools.xfldom.DOMShape,org.xfltools.xfldom.DOMSymbolInstance,org.xfltools.xfldom.DOMTimeline,org.xfltools.xfldom.MotionObject*/
 
 goog.require('flash.utils.Dictionary');
 goog.require('org.xfltools.xfldom.DOMDocument');
 goog.require('org.xfltools.xfldom.DOMFrame');
 goog.require('org.xfltools.xfldom.DOMLayer');
-goog.require('org.xfltools.xfldom.DOMLibrary');
 goog.require('org.xfltools.xfldom.DOMShape');
 goog.require('org.xfltools.xfldom.DOMSymbolInstance');
 goog.require('org.xfltools.xfldom.DOMTimeline');
@@ -49,7 +48,7 @@ org.xfltools.xfldom.DOMComponentFactory.XML_NODE_NAME_TO_CLASS;
  * @private
  * @type {org.xfltools.xfldom.DOMLibrary}
  */
-org.xfltools.xfldom.DOMComponentFactory._domLibrary = new org.xfltools.xfldom.DOMLibrary();
+org.xfltools.xfldom.DOMComponentFactory._domLibrary;
 
 
 /**
@@ -96,6 +95,7 @@ org.xfltools.xfldom.DOMComponentFactory.populateSymbols = function(rootFolderURL
     symbolURLs.push(rootFolderURL + "/LIBRARY/" + symbolXML.attribute('href'));
   }}
   
+  org.xfltools.xfldom.DOMComponentFactory._domLibrary = new org.xfltools.xfldom.DOMLibrary();
   org.xfltools.xfldom.DOMComponentFactory._domLibrary.addEventListener(flash.events.Event.COMPLETE, loadedCallback);
   org.xfltools.xfldom.DOMComponentFactory._domLibrary.load(symbolURLs);
 };
