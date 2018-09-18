@@ -5,12 +5,12 @@
   <target-player>11.7.0</target-player>
   <compiler>
     <source-path append="true">
-      <path-element>C:\Users\Tim\Documents\projects\XFLTools\src</path-element>
-      <path-element>C:\Users\Tim\Documents\projects\XFLTools\as-src</path-element>
+      <path-element>C:\Users\Tim\Documents\projects\xfltoolsgh\xfltools\src</path-element>
+      <path-element>C:\Users\Tim\Documents\projects\xfltoolsgh\xfltools\as-src</path-element>
     </source-path>
   </compiler>
   <file-specs>
-    <path-element>C:\Users\Tim\Documents\projects\XFLTools\src\XFLTools.mxml</path-element>
+    <path-element>C:\Users\Tim\Documents\projects\xfltoolsgh\xfltools\src\XFLTools.mxml</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
   <default-frame-rate>60</default-frame-rate>

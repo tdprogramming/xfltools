@@ -33,7 +33,7 @@
     <option customSDK="C:\Users\Tim\Documents\SDKs\apache-royale-0.9.4-bin-js-swf\royale-asjs"/>
     <option locale=""/>
     <option accessible="False"/>
-    <option additional=""/>
+    <option additional="-html-template=js-src/html-template.html"/>
     <option allowSourcePathOverlap="False"/>
     <option useResourceBundleMetadata="True"/>
     <option strict="True"/>
@@ -70,10 +70,10 @@
     <option isPrimeFacesVisualEditor="False"/>
   </options>
   <moonshineRunCustomization>
-    <option projectType="2"/>
     <option launchMethod="Simulator"/>
     <option targetPlatform="2"/>
     <option urlToLaunch="C:\Users\Tim\Documents\projects\XFLTools\bin\js-debug\index.html"/>
+    <option projectType="2"/>
     <option deviceSimulator="null"/>
     <deviceSimulator>null</deviceSimulator>
     <certAndroid>null</certAndroid>
