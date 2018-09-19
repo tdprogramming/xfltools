@@ -11,8 +11,6 @@ package flash.events
 
 		public function EventDispatcher(target:IEventDispatcher = null)
 		{
-			trace("This trace makes the compiler include a Language dependency. Please do not remove for now.");
-		
 			_javascriptImplementation = window["flashjs_events_EventDispatcher_construct"]();
 			
 			_eventListeners = new Vector.<EventListener>();

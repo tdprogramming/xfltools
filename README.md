@@ -14,15 +14,13 @@ The eventual aim is to develop a set of tools that can be used to resurrect very
 
 Other projects exist such as Shumway and SpriteFlexJS - this is intended as a complimentary approach that can eventually be mixed and matched with them.
 
-You can view a basic demo of what can be done at http://tdprogramming.com/demos/xfltools. This shows a chessboard related animation created entirely in the animated authoring environment. The symbols and tweens are parsed at run time and animated using Greensock's TimelineLite package, which can compile under Royale having had its dependencies satisifed by the Flash API clone described above.
-
-Note that at present it takes a while to get going with the tween. 
+You can view a basic demo of what can be done at http://tdprogramming.com/demos/xfltools. This shows a chessboard related animation created entirely in the animated authoring environment. The symbols and tweens are parsed at run time and animated using Create JS's TweenJS package. 
 
 How to build the demo.
 
 This is a pre-alpha project and is mainly being put up here so that I can pick the brains of the Apache Royale community to iron out the rough edges of the build process and improve the work flow. Currently only a "debug" Javascript build is supported.
 
-You will need the Moonshine IDE, Apache Royale SDK 0.9.2 or higher, and python installed.
+You will need the Moonshine IDE and Apache Royale SDK 0.9.2 or higher.
 
 Create a new "JS Royale Browser" project in Royale and you can use a "Loader" instance to load up the saved XFL Chess demo document. Note that the XFL file itself should be inside a folder which is also named [filename].xfl. The Loader will automatically parse the various files and folders in here to spin up the symbol library etc.
 
@@ -36,13 +34,10 @@ Create an application from the main mxml class that is created using the Applica
 
 Click "Project" then "Build As Javascript".
 
-Once the build is complete, you need to open a terminal or power shell window at the js-src folder in the generated bin/js-debug folder and run python dependency_assistant.py.
-
-This script adds missing javascript dependencies to the output. If you've been having any issues in this area, this may help with a stop gap solution to keep you going while we investigate further with the Royale team.
-
-I am seeking assistance from the maintainers at Royale for the issues that cause this patch to be needed. Hopefully soon it'll just build straight off and run normally.
-
 Troubleshooting:
+
+You need to be loading XFL files from a location that the browser accesses using a web protocol like http:// and you may need to include a .htaccess file allowing cross-origin access depending on where you're accessing it from.
+I'll be documenting this further soon.
 
 If you get an issue where the compiler says that it can't find the playerglobal.swc file, you need to download it from here:
 

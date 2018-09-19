@@ -11,8 +11,8 @@ goog.provide('org.apache.royale.core.Application');
 /* Royale Dependency List: org.apache.royale.core.IApplicationView,org.apache.royale.core.IBead,org.apache.royale.core.IChild,org.apache.royale.core.IUIBase,org.apache.royale.core.IValuesImpl,org.apache.royale.core.UIBase,org.apache.royale.core.ValuesManager,org.apache.royale.events.Event,org.apache.royale.utils.MXMLDataInterpreter,org.apache.royale.utils.Timer,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.core.ApplicationBase');
-goog.require('org.apache.royale.core.IParent');
 goog.require('org.apache.royale.core.IInitialViewApplication');
+goog.require('org.apache.royale.core.IParent');
 goog.require('org.apache.royale.core.IPopUpHost');
 goog.require('org.apache.royale.core.IRenderedObject');
 goog.require('org.apache.royale.core.IStrand');
@@ -49,13 +49,6 @@ goog.inherits(org.apache.royale.core.Application, org.apache.royale.core.Applica
  * Prevent renaming of class. Needed for reflection.
  */
 goog.exportSymbol('org.apache.royale.core.Application', org.apache.royale.core.Application);
-
-
-/**
- * @protected
- * @type {org.apache.royale.core.IParent}
- */
-org.apache.royale.core.Application.prototype.instanceParent = null;
 
 
 /**
@@ -101,15 +94,6 @@ org.apache.royale.core.Application.prototype._controller;
  * @param {Array} data
  */
 org.apache.royale.core.Application.prototype.generateMXMLAttributes = function(data) {
-  var /** @type {number} */ propCount = Number(data[0]);
-  var /** @type {number} */ n = data.length;
-  for (var /** @type {number} */ i = 1; i < n; i += 3) {
-    if (data[i] == "initialView") {
-      var /** @type {Array} */ initialViewArray = data.splice(i, 3);
-      var /** @type {number} */ offset = (propCount - 1) * 3 + 1;
-      data.splice(offset, 0, initialViewArray[0], initialViewArray[1], initialViewArray[2]);
-    }
-  }
   org.apache.royale.utils.MXMLDataInterpreter.generateMXMLProperties(this, data);
 };
 
@@ -281,20 +265,19 @@ org.apache.royale.core.Application.prototype.handleStartupTimer = function(event
 
 /**
  * @royaleignorecoercion org.apache.royale.core.IBead
- * @royaleignorecoercion org.apache.royale.core.UIBase
  * @protected
  */
 org.apache.royale.core.Application.prototype.initialize = function() {
-  org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances(this, this.instanceParent, this.MXMLDescriptor);
+  org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances(this, null, this.MXMLDescriptor);
   this.dispatchEvent('initialize');
+  this.initialView.applicationModel = this.model;
+  this.addElement(this.initialView);
   if (this.initialView) {
-    this.initialView.applicationModel = this.model;
-    this.addElement(this.initialView);
-    var /** @type {Object} */ baseView = this.initialView;
+    var /** @type {org.apache.royale.core.UIBase} */ baseView = org.apache.royale.utils.Language.as(this.initialView, org.apache.royale.core.UIBase);
     if (!isNaN(baseView.percentWidth) || !isNaN(baseView.percentHeight)) {
       this.element.style.height = window.innerHeight.toString() + 'px';
       this.element.style.width = window.innerWidth.toString() + 'px';
-      this.initialView.dispatchEvent(new org.apache.royale.events.Event("sizeChanged"));
+      this.initialView.dispatchEvent('sizeChanged');
     }
     this.dispatchEvent(new org.apache.royale.events.Event("viewChanged"));
   }
@@ -338,11 +321,6 @@ org.apache.royale.core.Application.prototype.set__controller = function(value) {
 };
 
 
-org.apache.royale.core.Application.prototype.get__popUpParent = function() {
-  return this;
-};
-
-
 org.apache.royale.core.Application.prototype.get__MXMLDescriptor = function() {
   return null;
 };
@@ -379,11 +357,6 @@ set: org.apache.royale.core.Application.prototype.set__model},
 controller: {
 get: org.apache.royale.core.Application.prototype.get__controller,
 set: org.apache.royale.core.Application.prototype.set__controller},
-/**
-  * @export
-  * @type {org.apache.royale.core.IParent} */
-popUpParent: {
-get: org.apache.royale.core.Application.prototype.get__popUpParent},
 /**
   * @export
   * @type {Array} */
@@ -424,7 +397,6 @@ org.apache.royale.core.Application.prototype.ROYALE_REFLECTION_INFO = function (
         'initialView': { type: 'org.apache.royale.core.IApplicationView', access: 'readwrite', declaredBy: 'org.apache.royale.core.Application'},
         'model': { type: 'Object', access: 'readwrite', declaredBy: 'org.apache.royale.core.Application', metadata: function () { return [ { name: 'Bindable', args: [ { key: '', value: '__NoChangeEvent__' } ] } ]; }},
         'controller': { type: 'Object', access: 'readwrite', declaredBy: 'org.apache.royale.core.Application', metadata: function () { return [ { name: 'Bindable', args: [ { key: '', value: '__NoChangeEvent__' } ] } ]; }},
-        'popUpParent': { type: 'org.apache.royale.core.IParent', access: 'readonly', declaredBy: 'org.apache.royale.core.Application'},
         'MXMLDescriptor': { type: 'Array', access: 'readonly', declaredBy: 'org.apache.royale.core.Application'},
         'numElements': { type: 'int', access: 'readonly', declaredBy: 'org.apache.royale.core.Application'}
       };

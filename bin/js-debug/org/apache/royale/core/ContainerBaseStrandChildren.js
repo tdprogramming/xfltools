@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.core.ContainerBaseStrandChildren');
-/* Royale Dependency List: org.apache.royale.core.IChild,org.apache.royale.core.IContainerBaseStrandChildrenHost*/
+/* Royale Dependency List: org.apache.royale.core.IChild,org.apache.royale.core.IStrandPrivate,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.core.IParent');
 
@@ -22,14 +22,13 @@ goog.require('org.apache.royale.core.IParent');
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
  *  @productversion Royale 0.0
- * 	@royaleignorecoercion org.apache.royale.core.IContainerBaseStrandChildrenHost
  * @constructor
  * @implements {org.apache.royale.core.IParent}
  * @param {org.apache.royale.core.IParent} owner
  */
 org.apache.royale.core.ContainerBaseStrandChildren = function(owner) {
   ;
-  this.owner = owner;
+  this.owner = org.apache.royale.utils.Language.as(owner, org.apache.royale.core.IStrandPrivate);
 };
 
 
@@ -41,7 +40,7 @@ goog.exportSymbol('org.apache.royale.core.ContainerBaseStrandChildren', org.apac
 
 /**
  * @export
- * @type {org.apache.royale.core.IContainerBaseStrandChildrenHost}
+ * @type {org.apache.royale.core.IStrandPrivate}
  */
 org.apache.royale.core.ContainerBaseStrandChildren.prototype.owner;
 
@@ -106,7 +105,7 @@ org.apache.royale.core.ContainerBaseStrandChildren.prototype.getElementAt = func
 
 
 org.apache.royale.core.ContainerBaseStrandChildren.prototype.get__numElements = function() {
-  return this.owner.$numElements;
+  return this.owner.$numElements();
 };
 
 
@@ -137,7 +136,7 @@ org.apache.royale.core.ContainerBaseStrandChildren.prototype.ROYALE_REFLECTION_I
   return {
     variables: function () {
       return {
-        'owner': { type: 'org.apache.royale.core.IContainerBaseStrandChildrenHost'}
+        'owner': { type: 'org.apache.royale.core.IStrandPrivate'}
       };
     },
     accessors: function () {

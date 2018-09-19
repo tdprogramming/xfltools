@@ -4,17 +4,19 @@
  *
  * @fileoverview
  *
- * @suppress {missingRequire|checkTypes|accessControls}
+ * @suppress {checkTypes|accessControls}
  */
 
 goog.provide('org.apache.royale.core.IPopUpHost');
-/* Royale Dependency List: org.apache.royale.core.IParent*/
+/* Royale Dependency List: */
 
+goog.require('org.apache.royale.core.IParent');
 
 
 
 /**
  * @interface
+ * @extends {org.apache.royale.core.IParent}
  */
 org.apache.royale.core.IPopUpHost = function() {
 };
@@ -24,8 +26,6 @@ org.apache.royale.core.IPopUpHost = function() {
  * Prevent renaming of class. Needed for reflection.
  */
 goog.exportSymbol('org.apache.royale.core.IPopUpHost', org.apache.royale.core.IPopUpHost);
-/**  * @type {org.apache.royale.core.IParent}
- */org.apache.royale.core.IPopUpHost.prototype.popUpParent;
 
 
 /**
@@ -33,7 +33,7 @@ goog.exportSymbol('org.apache.royale.core.IPopUpHost', org.apache.royale.core.IP
  *
  * @type {Object.<string, Array.<Object>>}
  */
-org.apache.royale.core.IPopUpHost.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'IPopUpHost', qName: 'org.apache.royale.core.IPopUpHost', kind: 'interface' }] };
+org.apache.royale.core.IPopUpHost.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'IPopUpHost', qName: 'org.apache.royale.core.IPopUpHost', kind: 'interface' }], interfaces: [org.apache.royale.core.IParent] };
 
 
 
@@ -44,11 +44,7 @@ org.apache.royale.core.IPopUpHost.prototype.ROYALE_CLASS_INFO = { names: [{ name
  */
 org.apache.royale.core.IPopUpHost.prototype.ROYALE_REFLECTION_INFO = function () {
   return {
-    accessors: function () {
-      return {
-        'popUpParent': { type: 'org.apache.royale.core.IParent', access: 'readonly', declaredBy: 'org.apache.royale.core.IPopUpHost'}
-      };
-    },
+    accessors: function () {return {};},
     methods: function () {return {};}
   };
 };

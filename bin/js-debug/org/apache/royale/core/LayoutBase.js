@@ -49,20 +49,6 @@ org.apache.royale.core.LayoutBase.prototype.host;
 
 
 /**
- * @private
- * @type {number}
- */
-org.apache.royale.core.LayoutBase.prototype.lastWidth = -1;
-
-
-/**
- * @private
- * @type {number}
- */
-org.apache.royale.core.LayoutBase.prototype.lastHeight = -1;
-
-
-/**
  * Changes in size to the host strand are handled (by default) by running the
  * layout sequence. Subclasses can override this function and use event.type
  * to handle specific changes in dimension.
@@ -75,11 +61,7 @@ org.apache.royale.core.LayoutBase.prototype.lastHeight = -1;
  * @param {org.apache.royale.events.Event} event
  */
 org.apache.royale.core.LayoutBase.prototype.handleSizeChange = function(event) {
-  if (this.host.width == this.lastWidth && this.host.height == this.lastHeight)
-    return;
   this.performLayout();
-  this.lastWidth = this.host.width;
-  this.lastHeight = this.host.height;
 };
 
 
@@ -110,26 +92,25 @@ org.apache.royale.core.LayoutBase.prototype.handleChildrenAdded = function(event
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
  *  @productversion Royale 0.8
- *  @royaleignorecoercion org.apache.royale.core.ILayoutParent
  * @protected
  * @param {org.apache.royale.events.Event} event
  */
 org.apache.royale.core.LayoutBase.prototype.childResizeHandler = function(event) {
   var /** @type {org.apache.royale.core.ILayoutHost} */ viewBead;
   if (event.type == "widthChanged" && !(this.host.isWidthSizedToContent() || !isNaN(this.host.explicitWidth))) {
-    viewBead = this.host.getLayoutHost();
+    viewBead = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutParent).getLayoutHost();
     viewBead.beforeLayout();
     viewBead.afterLayout();
     return;
   }
   if (event.type == "heightChanged" && !(this.host.isHeightSizedToContent() || !isNaN(this.host.explicitHeight))) {
-    viewBead = this.host.getLayoutHost();
+    viewBead = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutParent).getLayoutHost();
     viewBead.beforeLayout();
     viewBead.afterLayout();
     return;
   }
   if (event.type == "sizeChanged" && !(this.host.isHeightSizedToContent() || !isNaN(this.host.explicitHeight)) && !(this.host.isWidthSizedToContent() || !isNaN(this.host.explicitWidth))) {
-    viewBead = this.host.getLayoutHost();
+    viewBead = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutParent).getLayoutHost();
     viewBead.beforeLayout();
     viewBead.afterLayout();
     return;
@@ -234,21 +215,26 @@ org.apache.royale.core.LayoutBase.prototype.isLayoutRunning = false;
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
  *  @productversion Royale 0.8
- * @royaleignorecoercion org.apache.royale.core.ILayoutParent
- * @royaleignorecoercion org.apache.royale.events.IEventDispatcher
  * @export
  */
 org.apache.royale.core.LayoutBase.prototype.performLayout = function() {
   if (this.isLayoutRunning)
     return;
   this.isLayoutRunning = true;
-  var /** @type {org.apache.royale.core.ILayoutHost} */ viewBead = this.host.getLayoutHost();
+  var /** @type {number} */ oldWidth = this.host.width;
+  var /** @type {number} */ oldHeight = this.host.height;
+  var /** @type {org.apache.royale.core.ILayoutHost} */ viewBead = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutParent).getLayoutHost();
   viewBead.beforeLayout();
   if (this.layout()) {
     viewBead.afterLayout();
   }
   this.isLayoutRunning = false;
-  this.host.dispatchEvent(new org.apache.royale.events.Event("layoutComplete"));
+  org.apache.royale.utils.Language.as(this.host, org.apache.royale.events.IEventDispatcher, true).dispatchEvent(new org.apache.royale.events.Event("layoutComplete"));
+  if (this.host.width != oldWidth || this.host.height != oldHeight) {
+    this.isLayoutRunning = true;
+    this.host.dispatchEvent(new org.apache.royale.events.Event("sizeChanged"));
+    this.isLayoutRunning = false;
+  }
 };
 
 

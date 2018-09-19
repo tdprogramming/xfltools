@@ -54,8 +54,6 @@ package org.xfltools.xfldom
 			
 			for each (var solidColor:SolidColor in _solidColors)
 			{
-				trace("Solid fill color: " + solidColor.color + " and alpha: " + solidColor.alpha);
-				
 				var solidFill:GraphicsSolidFill = new GraphicsSolidFill(solidColor.color, solidColor.alpha);
 				
 				graphicsData.push(solidFill);

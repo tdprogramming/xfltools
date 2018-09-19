@@ -8,15 +8,14 @@
  */
 
 goog.provide('org.apache.royale.core.UIBase');
-/* Royale Dependency List: org.apache.royale.core.IBead,org.apache.royale.core.IBeadController,org.apache.royale.core.IBeadModel,org.apache.royale.core.IBeadView,org.apache.royale.core.IChild,org.apache.royale.core.IMeasurementBead,org.apache.royale.core.IParent,org.apache.royale.core.IUIBase,org.apache.royale.core.ValuesManager,org.apache.royale.core.WrappedHTMLElement,org.apache.royale.events.Event,org.apache.royale.events.ValueChangeEvent,org.apache.royale.html.util.addElementToWrapper,org.apache.royale.utils.CSSUtils,org.apache.royale.utils.loadBeadFromValuesManager,org.apache.royale.utils.Language*/
+/* Royale Dependency List: org.apache.royale.core.IBead,org.apache.royale.core.IBeadController,org.apache.royale.core.IBeadModel,org.apache.royale.core.IBeadView,org.apache.royale.core.IChild,org.apache.royale.core.IMeasurementBead,org.apache.royale.core.IParent,org.apache.royale.core.IUIBase,org.apache.royale.core.ValuesManager,org.apache.royale.core.WrappedHTMLElement,org.apache.royale.events.Event,org.apache.royale.events.ValueChangeEvent,org.apache.royale.html.util.addElementToWrapper,org.apache.royale.utils.CSSUtils,org.apache.royale.utils.StringUtil,org.apache.royale.utils.loadBeadFromValuesManager,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.core.HTMLElementWrapper');
 goog.require('org.apache.royale.events.IEventDispatcher');
-goog.require('org.apache.royale.core.IId');
 goog.require('org.apache.royale.core.ILayoutChild');
 goog.require('org.apache.royale.core.IParentIUIBase');
 goog.require('org.apache.royale.core.IRoyaleElement');
-goog.require('org.apache.royale.core.IStrandWithModelView');
+goog.require('org.apache.royale.core.IStrandWithModel');
 goog.require('org.apache.royale.core.IStyleableObject');
 
 
@@ -30,13 +29,12 @@ goog.require('org.apache.royale.core.IStyleableObject');
  *  @productversion Royale 0.0
  * @constructor
  * @extends {org.apache.royale.core.HTMLElementWrapper}
- * @implements {org.apache.royale.core.IStrandWithModelView}
+ * @implements {org.apache.royale.core.IStrandWithModel}
  * @implements {org.apache.royale.events.IEventDispatcher}
  * @implements {org.apache.royale.core.IParentIUIBase}
  * @implements {org.apache.royale.core.IStyleableObject}
  * @implements {org.apache.royale.core.ILayoutChild}
  * @implements {org.apache.royale.core.IRoyaleElement}
- * @implements {org.apache.royale.core.IId}
  */
 org.apache.royale.core.UIBase = function() {
   org.apache.royale.core.UIBase.base(this, 'constructor');
@@ -53,14 +51,14 @@ goog.exportSymbol('org.apache.royale.core.UIBase', org.apache.royale.core.UIBase
 
 
 /**
- * @protected
+ * @private
  * @type {number}
  */
 org.apache.royale.core.UIBase.prototype._explicitWidth;
 
 
 /**
- * @protected
+ * @private
  * @type {number}
  */
 org.apache.royale.core.UIBase.prototype._explicitHeight;
@@ -230,13 +228,9 @@ org.apache.royale.core.UIBase.prototype._x;
  */
 org.apache.royale.core.UIBase.prototype.setX = function(value) {
   
-  if (!isNaN(value)) {
-    if (this.positioner.parentNode != this.positioner.offsetParent)
-      value += this.positioner.parentNode.offsetLeft;
-    this.positioner.style.left = value.toString() + 'px';
-  } else {
-    this.positioner.style.left = "initial";
-  }
+  if (this.positioner.parentNode != this.positioner.offsetParent)
+    value += this.positioner.parentNode.offsetLeft;
+  this.positioner.style.left = value.toString() + 'px';
 };
 
 
@@ -260,18 +254,14 @@ org.apache.royale.core.UIBase.prototype._y;
  */
 org.apache.royale.core.UIBase.prototype.setY = function(value) {
   
-  if (!isNaN(value)) {
-    if (this.positioner.parentNode != this.positioner.offsetParent)
-      value += this.positioner.parentNode.offsetTop;
-    this.positioner.style.top = value.toString() + 'px';
-  } else {
-    this.positioner.style.top = "initial";
-  }
+  if (this.positioner.parentNode != this.positioner.offsetParent)
+    value += this.positioner.parentNode.offsetTop;
+  this.positioner.style.top = value.toString() + 'px';
 };
 
 
 /**
- * @export
+ * @private
  * @type {string}
  */
 org.apache.royale.core.UIBase.prototype.displayStyleForLayout;
@@ -289,9 +279,10 @@ org.apache.royale.core.UIBase.prototype.displayStyleForLayout;
  * @param {string} value
  */
 org.apache.royale.core.UIBase.prototype.setDisplayStyleForLayout = function(value) {
-  this.displayStyleForLayout = value;
   if (this.positioner.style.display !== 'none')
     this.positioner.style.display = value;
+  else
+    this.displayStyleForLayout = value;
 };
 
 
@@ -331,7 +322,7 @@ org.apache.royale.core.UIBase.prototype._style;
  * @export
  * @type {string}
  */
-org.apache.royale.core.UIBase.prototype.typeNames = "";
+org.apache.royale.core.UIBase.prototype.typeNames;
 
 
 /**
@@ -346,7 +337,7 @@ org.apache.royale.core.UIBase.prototype._className;
  * @return {string}
  */
 org.apache.royale.core.UIBase.prototype.computeFinalClassNames = function() {
-  return this._className ? this._className + " " + this.typeNames : this.typeNames;
+  return (this._className ? this._className + " " : "") + (this.typeNames ? this.typeNames : "");
 };
 
 
@@ -372,9 +363,7 @@ org.apache.royale.core.UIBase.prototype.beads;
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.9
- *  @royaleignorecoercion org.apache.royale.core.IBeadModel
- *  @royaleignorecoercion org.apache.royale.core.IBeadView
+ *  @productversion Royale 0.0
  * @export
  * @override
  */
@@ -384,13 +373,13 @@ org.apache.royale.core.UIBase.prototype.addBead = function(bead) {
     this._beads = org.apache.royale.utils.Language.Vector();
   this._beads.push(bead);
   if (org.apache.royale.utils.Language.is(bead, org.apache.royale.core.IBeadModel))
-    this._model = bead; else if (org.apache.royale.utils.Language.is(bead, org.apache.royale.core.IBeadView)) {
-    this._view = bead;
+    this._model = org.apache.royale.utils.Language.as(bead, org.apache.royale.core.IBeadModel); else if (org.apache.royale.utils.Language.is(bead, org.apache.royale.core.IBeadView)) {
+    this._view = org.apache.royale.utils.Language.as(bead, org.apache.royale.core.IBeadView);
     isView = true;
   }
   bead.strand = this;
   if (isView) {
-    this.dispatchEvent(new org.apache.royale.events.Event("viewChanged"));
+    org.apache.royale.utils.Language.as(this, org.apache.royale.events.IEventDispatcher, true).dispatchEvent(new org.apache.royale.events.Event("viewChanged"));
   }
 };
 
@@ -517,7 +506,9 @@ org.apache.royale.core.UIBase.prototype.removeElement = function(c, dispatchEven
  */
 org.apache.royale.core.UIBase.prototype.addedToParent = function() {
   var /** @type {Object} */ c;
-  this.setClassName(this.computeFinalClassNames());
+  if (this.typeNames) {
+    this.setClassName(this.computeFinalClassNames());
+  }
   if (this.style)
     org.apache.royale.core.ValuesManager["valuesImpl"].applyStyles(this, this.style);
   if (isNaN(this._explicitWidth) && isNaN(this._percentWidth)) {
@@ -678,8 +669,6 @@ org.apache.royale.core.UIBase.prototype.set__percentHeight = function(value) {
 
 
 org.apache.royale.core.UIBase.prototype.get__width = function() {
-  if (!isNaN(this._explicitWidth))
-    return this._explicitWidth;
   var /** @type {number} */ pixels;
   var /** @type {string} */ strpixels = this.element.style.width;
   if (strpixels == null)
@@ -705,8 +694,6 @@ org.apache.royale.core.UIBase.prototype.set__width = function(value) {
 
 
 org.apache.royale.core.UIBase.prototype.get__height = function() {
-  if (!isNaN(this._explicitHeight))
-    return this._explicitHeight;
   var /** @type {number} */ pixels;
   var /** @type {string} */ strpixels = this.element.style.height;
   if (strpixels == null)
@@ -732,8 +719,6 @@ org.apache.royale.core.UIBase.prototype.set__height = function(value) {
 
 
 org.apache.royale.core.UIBase.prototype.get__x = function() {
-  if (!isNaN(this._x))
-    return this._x;
   var /** @type {string} */ strpixels = this.positioner.style.left;
   var /** @type {number} */ pixels = parseFloat(strpixels);
   if (isNaN(pixels)) {
@@ -746,14 +731,13 @@ org.apache.royale.core.UIBase.prototype.get__x = function() {
 
 
 org.apache.royale.core.UIBase.prototype.set__x = function(value) {
-  this._x = value;
-  this.setX(value);
+  if (this.positioner.parentNode != this.positioner.offsetParent)
+    value += this.positioner.parentNode.offsetLeft;
+  this.positioner.style.left = value.toString() + 'px';
 };
 
 
 org.apache.royale.core.UIBase.prototype.get__y = function() {
-  if (!isNaN(this._y))
-    return this._y;
   var /** @type {string} */ strpixels = this.positioner.style.top;
   var /** @type {number} */ pixels = parseFloat(strpixels);
   if (isNaN(pixels)) {
@@ -766,8 +750,9 @@ org.apache.royale.core.UIBase.prototype.get__y = function() {
 
 
 org.apache.royale.core.UIBase.prototype.set__y = function(value) {
-  this._y = value;
-  this.setY(value);
+  if (this.positioner.parentNode != this.positioner.offsetParent)
+    value += this.positioner.parentNode.offsetTop;
+  this.positioner.style.top = value.toString() + 'px';
 };
 
 
@@ -795,14 +780,14 @@ org.apache.royale.core.UIBase.prototype.set__visible = function(value) {
 
 org.apache.royale.core.UIBase.prototype.get__view = function() {
   if (!this._view)
-    this._view = org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IBeadView, "iBeadView", this);
+    this._view = org.apache.royale.utils.Language.as(org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IBeadView, "iBeadView", this), org.apache.royale.core.IBeadView);
   return this._view;
 };
 
 
 org.apache.royale.core.UIBase.prototype.set__view = function(value) {
   if (this._view != value) {
-    this.addBead(value);
+    this.addBead(org.apache.royale.utils.Language.as(value, org.apache.royale.core.IBead));
     this.dispatchEvent(new org.apache.royale.events.Event("viewChanged"));
   }
 };
@@ -852,9 +837,8 @@ org.apache.royale.core.UIBase.prototype.get__className = function() {
 
 org.apache.royale.core.UIBase.prototype.set__className = function(value) {
   if (this._className !== value) {
+    this.setClassName(this.typeNames ? org.apache.royale.utils.StringUtil.trim(value + ' ' + this.typeNames) : value);
     this._className = value;
-    if (this.parent)
-      this.setClassName(this.computeFinalClassNames());
     this.dispatchEvent(new org.apache.royale.events.Event("classNameChanged"));
   }
 };
@@ -869,7 +853,7 @@ org.apache.royale.core.UIBase.prototype.get__numElements = function() {
 
 org.apache.royale.core.UIBase.prototype.get__measurementBead = function() {
   if (!this._measurementBead) {
-    this._measurementBead = org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IMeasurementBead, "iMeasurementBead", this);
+    this._measurementBead = org.apache.royale.utils.Language.as(org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IMeasurementBead, "iMeasurementBead", this), org.apache.royale.core.IMeasurementBead);
   }
   return this._measurementBead;
 };
@@ -1046,7 +1030,7 @@ get: org.apache.royale.core.UIBase.prototype.get__transformElement}}
  *
  * @type {Object.<string, Array.<Object>>}
  */
-org.apache.royale.core.UIBase.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'UIBase', qName: 'org.apache.royale.core.UIBase', kind: 'class' }], interfaces: [org.apache.royale.core.IStrandWithModelView, org.apache.royale.events.IEventDispatcher, org.apache.royale.core.IParentIUIBase, org.apache.royale.core.IStyleableObject, org.apache.royale.core.ILayoutChild, org.apache.royale.core.IRoyaleElement, org.apache.royale.core.IId] };
+org.apache.royale.core.UIBase.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'UIBase', qName: 'org.apache.royale.core.UIBase', kind: 'class' }], interfaces: [org.apache.royale.core.IStrandWithModel, org.apache.royale.events.IEventDispatcher, org.apache.royale.core.IParentIUIBase, org.apache.royale.core.IStyleableObject, org.apache.royale.core.ILayoutChild, org.apache.royale.core.IRoyaleElement] };
 
 
 
@@ -1059,7 +1043,6 @@ org.apache.royale.core.UIBase.prototype.ROYALE_REFLECTION_INFO = function () {
   return {
     variables: function () {
       return {
-        'displayStyleForLayout': { type: 'String'},
         'typeNames': { type: 'String'},
         'beads': { type: 'Array'}
       };

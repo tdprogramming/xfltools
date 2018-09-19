@@ -8,136 +8,155 @@
  */
 
 goog.provide('XFLTools');
-goog.require('org.apache.royale.core.Application');
-goog.require('org.apache.royale.core.SimpleCSSValuesImpl');
-goog.require('org.apache.royale.core.View');
-goog.require('org.apache.royale.html.Container');
-goog.require('org.apache.royale.html.Label');
-goog.require('flash.display.Loader');
-goog.require('flash.display.Sprite');
-goog.require('flash.net.URLRequest');
-goog.require('org.apache.royale.events.Event');
-goog.require('org.xfltools.core.ApplicationFactory');
-goog.require('XML');
-goog.require('org.apache.royale.html.beads.ContainerView');
-goog.require('org.apache.royale.html.supportClasses.Viewport');
-goog.require('org.apache.royale.html.beads.layouts.BasicLayout');
-goog.require('org.apache.royale.html.beads.models.ViewportModel');
-goog.require('org.apache.royale.html.beads.GroupView');
-goog.require('org.apache.royale.html.beads.layouts.BasicLayout');
-goog.require('org.apache.royale.utils.EffectTimer');
-goog.require('org.apache.royale.core.StatesWithTransitionsImpl');
 goog.require('flash.display.GraphicsEndFill');
+goog.require('flash.net.URLRequest');
 goog.require('flash.system.LoaderContext');
 goog.require('flash.accessibility.AccessibilityImplementation');
 goog.require('org.apache.royale.utils.OSUtils');
 goog.require('flash.display.GraphicsTrianglePath');
-goog.require('org.apache.royale.states.SetEventHandler');
 goog.require('org.apache.royale.utils.MXMLDataInterpreter');
+goog.require('org.apache.royale.html.supportClasses.ScrollingViewport');
 goog.require('org.xfltools.xfldom.StrokeStyle');
-goog.require('org.apache.royale.states.AddItems');
+goog.require('org.apache.royale.html.beads.layouts.HorizontalLayout');
 goog.require('flash.display.NativeMenu');
 goog.require('org.apache.royale.events.utils.KeyboardEventConverter');
+goog.require('org.apache.royale.events.ItemClickedEvent');
+goog.require('org.apache.royale.core.IStatesImpl');
 goog.require('flash.display.GraphicsStroke');
 goog.require('org.apache.royale.core.IMeasurementBead');
 goog.require('flash.system.ApplicationDomain');
 goog.require('org.xfltools.xfldom.TweenVO');
 goog.require('org.apache.royale.events.MouseEvent');
 goog.require('org.apache.royale.utils.Endian');
-goog.require('org.apache.royale.states.SetProperty');
+goog.require('org.apache.royale.html.beads.TextItemRendererFactoryForArrayData');
+goog.require('org.apache.royale.html.DataGridButtonBar');
+goog.require('org.apache.royale.core.SimpleCSSStylesWithFlex');
 goog.require('flash.display.GradientType');
+goog.require('org.apache.royale.html.beads.models.DataGridCollectionViewModel');
 goog.require('org.xfltools.display.XFLLoader');
 goog.require('org.apache.royale.events.BrowserEvent');
 goog.require('org.apache.royale.html.util.addElementToWrapper');
 goog.require('org.apache.royale.core.styles.BorderStyles');
 goog.require('flash.utils.ByteArray');
+goog.require('org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController');
+goog.require('org.apache.royale.html.supportClasses.StringItemRenderer');
+goog.require('org.apache.royale.html.Container');
 goog.require('org.xfltools.core.EventListener');
 goog.require('org.xfltools.utils.TWIPS');
 goog.require('org.xfltools.xfldom.PropertyContainer');
 goog.require('org.xfltools.xfldom.EdgeDescriptor');
 goog.require('org.apache.royale.utils.CSSUtils');
 goog.require('org.xfltools.xfldom.FillStyle');
+goog.require('org.apache.royale.html.beads.models.DataProviderModel');
 goog.require('org.apache.royale.geom.Point');
+goog.require('org.apache.royale.html.beads.models.DataGridModel');
 goog.require('flash.text.TextSnapshot');
 goog.require('org.apache.royale.events.utils.MouseEventConverter');
-goog.require('org.apache.royale.effects.Effect');
+goog.require('org.apache.royale.events.ItemAddedEvent');
+goog.require('org.apache.royale.html.supportClasses.DataGridColumnList');
 goog.require('org.xfltools.xfldom.DOMLibrary');
 goog.require('flash.display.Scene');
-goog.require('org.apache.royale.core.IBeadModel');
 goog.require('org.xfltools.xfldom.DOMSymbolItem');
+goog.require('flash.events.Event');
 goog.require('org.apache.royale.events.getTargetWrapper');
 goog.require('flash.display.LoaderInfo');
 goog.require('org.apache.royale.debugging.assertType');
 goog.require('flash.geom.Point');
 goog.require('org.xfltools.xfldom.Edge');
 goog.require('org.apache.royale.events.ElementEvents');
-goog.require('flash.utils.getTimer');
+goog.require('org.apache.royale.html.beads.DataGridView');
 goog.require('org.xfltools.xfldom.DOMComponentFactory');
 goog.require('flash.display.ShaderData');
 goog.require('org.apache.royale.geom.Size');
 goog.require('QName');
 goog.require('org.apache.royale.states.State');
+goog.require('org.apache.royale.html.beads.DataFieldProviderBead');
 goog.require('org.apache.royale.core.WrappedHTMLElement');
-goog.require('com.greensock.TweenLite');
 goog.require('org.apache.royale.core.ValuesManager');
 goog.require('org.apache.royale.events.ValueChangeEvent');
 goog.require('org.apache.royale.utils.BinaryData');
 goog.require('org.xfltools.utils.XMLAssistant');
 goog.require('org.apache.royale.core.IContentView');
+goog.require('org.apache.royale.html.beads.layouts.BasicLayout');
+goog.require('org.apache.royale.core.ClassFactory');
 goog.require('flash.net.URLLoader');
 goog.require('org.apache.royale.events.KeyboardEvent');
 goog.require('flash.accessibility.AccessibilityProperties');
 goog.require('flash.display.LineScaleMode');
 goog.require('org.apache.royale.debugging.assert');
 goog.require('org.xfltools.utils.ObjectAssistant');
-goog.require('com.greensock.TimelineLite');
+goog.require('flash.display.Loader');
+goog.require('org.apache.royale.html.beads.ButtonBarView');
+goog.require('org.apache.royale.events.ItemRendererEvent');
 goog.require('org.apache.royale.utils.StringUtil');
+goog.require('org.apache.royale.events.CollectionEvent');
+goog.require('org.apache.royale.html.supportClasses.TextButtonItemRenderer');
+goog.require('org.apache.royale.html.beads.models.ButtonBarModel');
+goog.require('org.apache.royale.core.ItemRendererClassFactory');
 goog.require('org.apache.royale.utils.StringTrimmer');
 goog.require('flash.geom.Matrix');
 goog.require('flash.display.GraphicsGradientFill');
 goog.require('Namespace');
+goog.require('org.apache.royale.html.beads.controllers.ItemRendererMouseController');
 goog.require('org.apache.royale.core.layout.MarginData');
-goog.require('org.apache.royale.states.Transition');
+goog.require('org.apache.royale.core.SimpleCSSStyles');
+goog.require('org.apache.royale.html.DataGrid');
+goog.require('org.apache.royale.collections.ICollectionView');
 goog.require('flash.display.Graphics');
+goog.require('org.apache.royale.core.SimpleCSSValuesImpl');
+goog.require('org.apache.royale.html.Label');
 goog.require('flash.display.CapsStyle');
 goog.require('flash.display.GraphicsShaderFill');
 goog.require('org.xfltools.xfldom.AnimationCore');
 goog.require('flash.display.GraphicsPathCommand');
+goog.require('org.apache.royale.html.beads.layouts.DataGridLayout');
 goog.require('flash.display.Shader');
+goog.require('org.apache.royale.html.beads.models.DataGridPresentationModel');
+goog.require('org.apache.royale.html.beads.layouts.VerticalLayout');
 goog.require('flash.geom.ColorTransform');
 goog.require('flash.geom.Transform');
+goog.require('org.apache.royale.core.Application');
 goog.require('flash.display.GraphicsPath');
 goog.require('flash.display.Bitmap');
 goog.require('org.apache.royale.events.utils.EventUtils');
-goog.require('org.apache.royale.states.ItemAndDescriptor');
 goog.require('flash.filters.BitmapFilter');
 goog.require('org.xfltools.commands.LoadDOMSymbolItemCommand');
 goog.require('flash.display.GraphicsBitmapFill');
 goog.require('flash.display.GraphicsSolidFill');
-goog.require('com.greensock.core.PropTween');
 goog.require('org.apache.royale.utils.PointUtils');
 goog.require('flash.events.UncaughtErrorEvents');
 goog.require('flash.display.BitmapData');
 goog.require('org.apache.royale.core.ContainerBaseStrandChildren');
+goog.require('org.apache.royale.html.beads.models.ViewportModel');
+goog.require('flash.display.Shape');
 goog.require('org.apache.royale.utils.loadBeadFromValuesManager');
+goog.require('org.apache.royale.html.beads.DataItemRendererFactoryForArrayData');
 goog.require('flash.geom.Rectangle');
+goog.require('org.xfltools.core.ApplicationFactory');
 goog.require('flash.display.Stage');
 goog.require('org.xfltools.commands.CommandQueue');
+goog.require('org.apache.royale.html.beads.DataGridColumnChangePropagator');
 goog.require('org.xfltools.xfldom.TimeMap');
-goog.require('org.apache.royale.core.IBeadController');
+goog.require('org.apache.royale.html.beads.layouts.ButtonBarLayout');
+goog.require('org.apache.royale.events.ItemRemovedEvent');
+goog.require('org.apache.royale.html.supportClasses.DataGridColumn');
 goog.require('flash.geom.Vector3D');
 goog.require('org.apache.royale.debugging.throwError');
 goog.require('org.apache.royale.events.ValueEvent');
 goog.require('org.xfltools.xfldom.Keyframe');
+goog.require('org.apache.royale.html.beads.DataItemRendererFactoryForCollectionView');
 goog.require('org.xfltools.xfldom.SolidColor');
 goog.require('org.apache.royale.core.layout.LayoutData');
 goog.require('org.apache.royale.utils.StringPadder');
 goog.require('XMLList');
 goog.require('org.xfltools.xfldom.Property');
 goog.require('org.apache.royale.events.utils.KeyConverter');
+goog.require('org.apache.royale.utils.Language');
 goog.require('org.apache.royale.utils.Timer');
+goog.require('XML');
 goog.require('flash.display.MovieClip');
-/* Royale Dependency List: org.apache.royale.core.SimpleCSSValuesImpl,org.apache.royale.core.View,org.apache.royale.html.Container,org.apache.royale.html.Label,flash.display.Loader,flash.display.Sprite,flash.net.URLRequest,org.apache.royale.events.Event,org.xfltools.core.ApplicationFactory,XML,org.apache.royale.html.beads.ContainerView,org.apache.royale.html.supportClasses.Viewport,org.apache.royale.html.beads.layouts.BasicLayout,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.GroupView,org.apache.royale.html.beads.layouts.BasicLayout,org.apache.royale.utils.EffectTimer,org.apache.royale.core.StatesWithTransitionsImpl*/
+goog.require('org.apache.royale.core.View');
+/* Royale Dependency List: org.apache.royale.core.SimpleCSSValuesImpl,org.apache.royale.core.View,org.apache.royale.html.Container,org.apache.royale.html.Label,flash.display.Loader,flash.display.Sprite,flash.net.URLRequest,org.apache.royale.events.Event,org.xfltools.core.ApplicationFactory,XML,org.apache.royale.html.beads.ButtonBarView,org.apache.royale.html.supportClasses.TextButtonItemRenderer,org.apache.royale.html.beads.layouts.ButtonBarLayout,org.apache.royale.html.beads.models.ButtonBarModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.TextItemRendererFactoryForArrayData,org.apache.royale.html.beads.ContainerView,org.apache.royale.html.supportClasses.Viewport,org.apache.royale.html.beads.layouts.BasicLayout,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataContainerView,org.apache.royale.html.supportClasses.StringItemRenderer,org.apache.royale.html.supportClasses.Viewport,org.apache.royale.html.beads.layouts.VerticalLayout,org.apache.royale.html.beads.models.DataProviderModel,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataItemRendererFactoryForArrayData,org.apache.royale.html.beads.DataGridView,org.apache.royale.html.beads.layouts.DataGridLayout,org.apache.royale.html.beads.models.DataGridModel,org.apache.royale.html.beads.DataGridColumnChangePropagator,org.apache.royale.html.beads.models.DataGridPresentationModel,org.apache.royale.html.beads.ButtonBarView,org.apache.royale.html.supportClasses.TextButtonItemRenderer,org.apache.royale.html.beads.layouts.ButtonBarLayout,org.apache.royale.html.beads.models.ButtonBarModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.TextItemRendererFactoryForArrayData,org.apache.royale.html.beads.ListView,org.apache.royale.html.supportClasses.StringItemRenderer,org.apache.royale.html.supportClasses.Viewport,org.apache.royale.html.beads.layouts.VerticalLayout,org.apache.royale.html.beads.models.DataGridModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataItemRendererFactoryForArrayData,org.apache.royale.html.supportClasses.ScrollingViewport,org.apache.royale.html.beads.layouts.HorizontalLayout,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataGridView,org.apache.royale.html.beads.layouts.DataGridLayout,org.apache.royale.html.beads.models.DataGridCollectionViewModel,org.apache.royale.html.beads.DataGridColumnChangePropagator,org.apache.royale.html.beads.models.DataGridPresentationModel,org.apache.royale.html.beads.ListView,org.apache.royale.html.supportClasses.StringItemRenderer,org.apache.royale.html.supportClasses.Viewport,org.apache.royale.html.beads.layouts.VerticalLayout,org.apache.royale.html.beads.models.DataGridCollectionViewModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataItemRendererFactoryForCollectionView,org.apache.royale.html.beads.layouts.HorizontalFlexLayout,org.apache.royale.html.beads.ListView,org.apache.royale.html.supportClasses.StringItemRenderer,org.apache.royale.html.supportClasses.ScrollingViewport,org.apache.royale.html.beads.layouts.VerticalLayout,org.apache.royale.html.beads.models.ArraySelectionModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataItemRendererFactoryForArrayData,org.apache.royale.html.beads.ListView,org.apache.royale.html.supportClasses.StringItemRenderer,org.apache.royale.html.supportClasses.ScrollingViewport,org.apache.royale.html.beads.layouts.VerticalLayout,org.apache.royale.html.beads.models.SingleSelectionCollectionViewModel,org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController,org.apache.royale.core.ItemRendererClassFactory,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.DataItemRendererFactoryForCollectionView,org.apache.royale.html.supportClasses.ScrollingViewport,org.apache.royale.html.beads.layouts.BasicLayout,org.apache.royale.html.beads.models.ViewportModel,org.apache.royale.html.beads.controllers.ItemRendererMouseController,org.apache.royale.html.beads.GroupView,org.apache.royale.html.beads.layouts.BasicLayout*/
 
 goog.require('org.apache.royale.core.Application');
 
@@ -211,10 +230,7 @@ goog.exportSymbol('XFLTools', XFLTools);
 
 
 
-/** 
- * <inject_html>
- * <script src="js-src/createJS/EaselJS-1.0.0/lib/easeljs.min.js"></script><script src="js-src/createJS/PreloadJS-1.0.0/lib/preloadjs.min.js"></script><script src="js-src/createJS/SoundJS-1.0.0/lib/soundjs.min.js"></script><script src="js-src/createJS/TweenJS-1.0.0/lib/tweenjs.min.js"></script><script src="js-src/flashjsbase.js"></script><script src="js-src/flashjs/crypto/generateRandomBytes.js"></script><script src="js-src/flashjs/display/Bitmap.js"></script><script src="js-src/flashjs/display/BitmapData.js"></script><script src="js-src/flashjs/display/DisplayObject.js"></script><script src="js-src/flashjs/display/DisplayObjectContainer.js"></script><script src="js-src/flashjs/display/Graphics.js"></script><script src="js-src/flashjs/display/Loader.js"></script><script src="js-src/flashjs/events/Event.js"></script><script src="js-src/flashjs/events/EventDispatcher.js"></script><script src="js-src/flashjs/filters/BlurFilter.js"></script><script src="js-src/flashjs/filters/ColorMatrixFilter.js"></script><script src="js-src/flashjs/geom/Matrix.js"></script><script src="js-src/flashjs/geom/Point.js"></script><script src="js-src/flashjs/geom/Rectangle.js"></script><script src="js-src/flashjs/net/URLLoader.js"></script><script src="js-src/flashjs/text/TextField.js"></script><script src="js-src/flashjs/utils/getTimer.js"></script>
- * </inject_html>
+/**
  * @export
  */
 XFLTools.prototype.initApp = function() {
@@ -340,7 +356,51 @@ this["boxSizing"] = "border-box";
 this["MozBoxSizing"] = "border-box"},
 0,
 1,
+".unselectable",
+function() {this["MozUserSelect"] = "-moz-none";
+this["OUserSelect"] = "none";
+this["WebkitUserSelect"] = "none";
+this["userSelect"] = "none";
+this["KhtmlUserSelect"] = "none"},
+0,
+1,
 "org.apache.royale.core.Application",
+function() {this["padding"] = 0.0;
+this["margin"] = 0.0},
+0,
+1,
+"org.apache.royale.html.Button",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 16316664;
+this["margin"] = 0.0;
+this["borderRadius"] = 2.0},
+0,
+1,
+"org.apache.royale.html.Button:hover",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 15263976},
+0,
+1,
+"org.apache.royale.html.Button:active",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 14211288},
+0,
+1,
+"org.apache.royale.html.ButtonBar",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ButtonBarView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.TextButtonItemRenderer;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.ButtonBarLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.ButtonBarModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.TextItemRendererFactoryForArrayData;
+this["borderStyle"] = "none"},
+0,
+1,
+".opt_org-apache.royale-html-ComboBox_Button",
 function() {this["padding"] = 0.0;
 this["margin"] = 0.0},
 0,
@@ -353,26 +413,137 @@ this["alignItems"] = "flex-start";
 this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel},
 0,
 1,
-"org.apache.royale.core.View",
-function() {this["iBeadView"] = org.apache.royale.html.beads.GroupView;
-this["iBeadLayout"] = org.apache.royale.html.beads.layouts.BasicLayout},
+"org.apache.royale.html.DataContainer",
+function() {this["iBeadView"] = org.apache.royale.html.beads.DataContainerView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.StringItemRenderer;
+this["iViewport"] = org.apache.royale.html.supportClasses.Viewport;
+this["borderColor"] = 2236962;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.VerticalLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.DataProviderModel;
+this["borderWidth"] = 1.0;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.DataItemRendererFactoryForArrayData;
+this["borderStyle"] = "solid"},
 0,
 1,
-"global",
-function() {this["iEffectTimer"] = org.apache.royale.utils.EffectTimer;
-this["verticalAlign"] = "top";
-this["padding"] = 0.0;
-this["horizontalGap"] = 8.0;
-this["horizontalAlign"] = "left";
-this["whiteSpaceCollapse"] = "collapse";
-this["effectTimerInterval"] = 10.0;
-this["verticalGap"] = 6.0;
-this["iStatesImpl"] = org.apache.royale.core.StatesWithTransitionsImpl},
+"org.apache.royale.html.DataGrid",
+function() {this["iBeadView"] = org.apache.royale.html.beads.DataGridView;
+this["border"] = [1.0, "solid", 2236962];
+this["backgroundColor"] = 16777215;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.DataGridLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.DataGridModel;
+this["iChangePropagator"] = org.apache.royale.html.beads.DataGridColumnChangePropagator;
+this["width"] = 200.0;
+this["iDataGridPresentationModel"] = org.apache.royale.html.beads.models.DataGridPresentationModel;
+this["height"] = 200.0},
 0,
 1,
-"*",
-function() {this["fontFamily"] = "Verdana";
-this["fontSize"] = 12.0},
+"org.apache.royale.html.DataGridButtonBar",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ButtonBarView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.TextButtonItemRenderer;
+this["minHeight"] = 40.0;
+this["flexGrow"] = 0.0;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.ButtonBarLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.ButtonBarModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.TextItemRendererFactoryForArrayData;
+this["borderStyle"] = "none";
+this["height"] = 40.0},
+0,
+1,
+"org.apache.royale.html.supportClasses.DataGridColumnList",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ListView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.StringItemRenderer;
+this["iViewport"] = org.apache.royale.html.supportClasses.Viewport;
+this["backgroundColor"] = 16777215;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.VerticalLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.DataGridModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.DataItemRendererFactoryForArrayData;
+this["borderStyle"] = "none"},
+0,
+1,
+".opt_org-apache.royale-html-DataGrid_ListArea",
+function() {this["iViewport"] = org.apache.royale.html.supportClasses.ScrollingViewport;
+this["backgroundColor"] = 16777215;
+this["flexGrow"] = 1.0;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.HorizontalLayout;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel},
+0,
+1,
+".DynamicDataGrid",
+function() {this["iBeadView"] = org.apache.royale.html.beads.DataGridView;
+this["border"] = [1.0, "solid", 2236962];
+this["backgroundColor"] = 16777215;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.DataGridLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.DataGridCollectionViewModel;
+this["iChangePropagator"] = org.apache.royale.html.beads.DataGridColumnChangePropagator;
+this["columnClassName"] = "DynamicDataGridColumnList";
+this["iDataGridPresentationModel"] = org.apache.royale.html.beads.models.DataGridPresentationModel},
+0,
+1,
+".DynamicDataGridColumnList",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ListView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.StringItemRenderer;
+this["iViewport"] = org.apache.royale.html.supportClasses.Viewport;
+this["backgroundColor"] = 16777215;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.VerticalLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.DataGridCollectionViewModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.DataItemRendererFactoryForCollectionView;
+this["borderStyle"] = "none"},
+0,
+1,
+".opt_org-apache.royale-html-DateChooser_MonthButtons",
+function() {this["iBeadLayout"] = org.apache.royale.html.beads.layouts.HorizontalFlexLayout;
+this["height"] = 20.0},
+0,
+1,
+"org.apache.royale.html.List",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ListView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.StringItemRenderer;
+this["iViewport"] = org.apache.royale.html.supportClasses.ScrollingViewport;
+this["border"] = [1.0, "solid", 2236962];
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.VerticalLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.ArraySelectionModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.DataItemRendererFactoryForArrayData},
+0,
+1,
+".DynamicList",
+function() {this["iBeadView"] = org.apache.royale.html.beads.ListView;
+this["iItemRenderer"] = org.apache.royale.html.supportClasses.StringItemRenderer;
+this["iViewport"] = org.apache.royale.html.supportClasses.ScrollingViewport;
+this["borderColor"] = 2236962;
+this["backgroundColor"] = 16777215;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.VerticalLayout;
+this["iBeadModel"] = org.apache.royale.html.beads.models.SingleSelectionCollectionViewModel;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ListSingleSelectionMouseController;
+this["iItemRendererClassFactory"] = org.apache.royale.core.ItemRendererClassFactory;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["iDataProviderItemRendererMapper"] = org.apache.royale.html.beads.DataItemRendererFactoryForCollectionView;
+this["borderStyle"] = "solid"},
+0,
+1,
+"TreeGrid .TreeGridColumn",
+function() {this["border"] = "none"},
+0,
+1,
+".opt_org-apache.royale-html-TreeGrid_ListArea",
+function() {this["iViewport"] = org.apache.royale.html.supportClasses.ScrollingViewport;
+this["backgroundColor"] = 16777215;
+this["flexGrow"] = 1.0;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.BasicLayout;
+this["iViewportModel"] = org.apache.royale.html.beads.models.ViewportModel;
+this["position"] = "absolute"},
 0,
 1,
 "Panel .TitleBar",
@@ -383,6 +554,106 @@ function() {this["borderBottom"] = [1.0, "solid", 3355443]},
 function() {this["backgroundColor"] = 16777215},
 0,
 1,
+".SliderTrack",
+function() {this["position"] = "absolute"},
+0,
+1,
+".SliderThumb",
+function() {this["position"] = "absolute"},
+0,
+1,
+".SpinnerButton",
+function() {this["padding"] = 0.0;
+this["margin"] = 0.0;
+this["fontSize"] = 6.0},
+0,
+1,
+".SpinnerButton:hover",
+function() {this["padding"] = 0.0;
+this["margin"] = 0.0;
+this["fontSize"] = 6.0},
+0,
+1,
+"org.apache.royale.html.supportClasses.StringItemRenderer",
+function() {this["cursor"] = "pointer";
+this["paddingBottom"] = 4.0;
+this["flexGrow"] = 1.0;
+this["fontFamily"] = "sans-serif";
+this["flexShrink"] = 0.0;
+this["iBeadController"] = org.apache.royale.html.beads.controllers.ItemRendererMouseController;
+this["fontSize"] = 12.0;
+this["paddingTop"] = 4.0},
+0,
+1,
+"TitleBar .TitleBarCloseButton",
+function() {this["margin"] = 0.0;
+this["width"] = 16.0;
+this["height"] = 16.0},
+0,
+1,
+"TitleBar .TitleBarTitle",
+function() {this["padding"] = 0.0;
+this["margin"] = 0.0;
+this["fontWeight"] = "bold"},
+0,
+1,
+".toggleTextButton",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 16316664},
+0,
+1,
+".toggleTextButton:hover",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 15263976},
+0,
+1,
+".toggleTextButton_Selected",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 14211288},
+0,
+1,
+".toggleTextButton_Selected:hover",
+function() {this["border"] = [1.0, "solid", 8421504];
+this["padding"] = 4.0;
+this["backgroundColor"] = 15263976},
+0,
+1,
+"org.apache.royale.core.View",
+function() {this["iBeadView"] = org.apache.royale.html.beads.GroupView;
+this["iBeadLayout"] = org.apache.royale.html.beads.layouts.BasicLayout},
+0,
+1,
+"global",
+function() {this["effectTimerInterval"] = 10.0},
+0,
+1,
+"org.apache.royale.html.CheckBox",
+function() {this["fontFamily"] = "sans-serif";
+this["fontSize"] = 12.0},
+0,
+1,
 "org.apache.royale.html.Label",
+function() {this["fontFamily"] = "sans-serif";
+this["fontSize"] = 12.0},
+0,
+1,
+"org.apache.royale.html.Group",
+function() {this["borderWidth"] = 1.0},
+0,
+1,
+"org.apache.royale.html.RadioButton",
+function() {this["fontFamily"] = "sans-serif";
+this["fontSize"] = 12.0},
+0,
+1,
+"org.apache.royale.html.supportClasses.MXMLItemRenderer",
+function() {this["fontFamily"] = "sans-serif";
+this["fontSize"] = 12.0},
+0,
+1,
+"org.apache.royale.html.Menu",
 function() {this["fontFamily"] = "sans-serif";
 this["fontSize"] = 12.0}];

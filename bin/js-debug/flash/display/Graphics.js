@@ -451,7 +451,6 @@ flash.display.Graphics.prototype.lineStyle = function(thickness, color, alpha, p
   }
   this._javascriptImplementation.graphics.setStrokeStyle(thickness, capsAsNumber, joints, miterLimit, ignoreScale);
   var /** @type {string} */ colorString = flash.display.Graphics.colorStringFromUint(color) + flash.display.Graphics.alphaStringFromUint(alpha);
-  org.apache.royale.utils.Language.trace("Graphics stroke color string = " + colorString);
   this._javascriptImplementation.graphics.beginStroke(flash.display.Graphics.colorStringFromUint(color) + flash.display.Graphics.alphaStringFromUint(alpha));
 };
 

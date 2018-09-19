@@ -92,18 +92,6 @@ org.apache.royale.utils.BinaryData.prototype._position = 0;
 
 
 /**
- *  create a string representation of the binary data
- * @export
- * @return {string}
- */
-org.apache.royale.utils.BinaryData.prototype.toString = function() {
-  
-  this._position = 0;
-  return this.readUTFBytes(this.length);
-};
-
-
-/**
  *  Write a Boolean value (as a single byte) at the current position
  *
  *  @asparam {Boolean} value The boolean value to write into the BinaryData at the current position
@@ -138,7 +126,8 @@ org.apache.royale.utils.BinaryData.prototype.writeByte = function(byte) {
   if (this._position + 1 > this._len) {
     this.setBufferSize(this._position + 1);
   }
-  this.getTypedArray()[this._position++] = byte;
+  new Uint8Array(this.ba, this._position, 1)[0] = byte;
+  this._position++;
 };
 
 
@@ -192,17 +181,14 @@ org.apache.royale.utils.BinaryData.prototype.writeBytes = function(source, offse
  */
 org.apache.royale.utils.BinaryData.prototype.writeShort = function(short) {
   
+  if (!this._sysEndian) {
+    short = (((short & 0xff00) >>> 8) | ((short & 0xff) << 8));
+  }
   if (this._position + 2 > this._len) {
     this.setBufferSize(this._position + 2);
   }
-  var /** @type {Uint8Array} */ arr = this.getTypedArray();
-  if (this.endian == org.apache.royale.utils.Endian.BIG_ENDIAN) {
-    arr[this._position++] = (short & 0x0000ff00) >> 8;
-    arr[this._position++] = (short & 0x000000ff);
-  } else {
-    arr[this._position++] = (short & 0x000000ff);
-    arr[this._position++] = (short & 0x0000ff00) >> 8;
-  }
+  new Int16Array(this.ba, this._position, 1)[0] = short;
+  this._position += 2;
 };
 
 
@@ -220,7 +206,14 @@ org.apache.royale.utils.BinaryData.prototype.writeShort = function(short) {
  */
 org.apache.royale.utils.BinaryData.prototype.writeUnsignedInt = function(val) {
   
-  this.writeInt(val);
+  if (!this._sysEndian) {
+    val = ((val & 0xff000000) >>> 24) | ((val & 0x00ff0000) >> 8) | ((val & 0x0000ff00) << 8) | (val << 24);
+  }
+  if (this._position + 4 > this._len) {
+    this.setBufferSize(this._position + 4);
+  }
+  new Uint32Array(this.ba, this._position, 1)[0] = val;
+  this._position += 4;
 };
 
 
@@ -238,21 +231,14 @@ org.apache.royale.utils.BinaryData.prototype.writeUnsignedInt = function(val) {
  */
 org.apache.royale.utils.BinaryData.prototype.writeInt = function(val) {
   
+  if (!this._sysEndian) {
+    val = (((val & 0xff000000) >>> 24) | ((val & 0x00ff0000) >> 8) | ((val & 0x0000ff00) << 8) | (val << 24)) >> 0;
+  }
   if (this._position + 4 > this._len) {
     this.setBufferSize(this._position + 4);
   }
-  var /** @type {Uint8Array} */ arr = this.getTypedArray();
-  if (this.endian == org.apache.royale.utils.Endian.BIG_ENDIAN) {
-    arr[this._position++] = (val & 0xff000000) >> 24;
-    arr[this._position++] = (val & 0x00ff0000) >> 16;
-    arr[this._position++] = (val & 0x0000ff00) >> 8;
-    arr[this._position++] = (val & 0x000000ff);
-  } else {
-    arr[this._position++] = (val & 0x000000ff);
-    arr[this._position++] = (val & 0x0000ff00) >> 8;
-    arr[this._position++] = (val & 0x00ff0000) >> 16;
-    arr[this._position++] = (val & 0xff000000) >> 24;
-  }
+  new Int32Array(this.ba, this._position, 1)[0] = val;
+  this._position += 4;
 };
 
 
@@ -274,7 +260,11 @@ org.apache.royale.utils.BinaryData.prototype.writeFloat = function(val) {
   if (this._position + 4 > this._len) {
     this.setBufferSize(this._position + 4);
   }
-  this.getDataView().setFloat32(this._position, val, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
+  if (this._sysEndian) {
+    new Float32Array(this.ba, this._position, 1)[0] = val;
+  } else {
+    new DataView(this.ba).setFloat32(this._position, val, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
+  }
   this._position += 4;
 };
 
@@ -297,7 +287,10 @@ org.apache.royale.utils.BinaryData.prototype.writeDouble = function(val) {
   if (this._position + 8 > this._len) {
     this.setBufferSize(this._position + 8);
   }
-  this.getDataView().setFloat64(this._position, val, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
+  if (this._sysEndian)
+    new Float64Array(this.ba, this._position, 1)[0] = val;
+  else
+    new DataView(this.ba).setFloat64(this._position, val, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
   this._position += 8;
 };
 
@@ -317,7 +310,7 @@ org.apache.royale.utils.BinaryData.prototype.writeDouble = function(val) {
  */
 org.apache.royale.utils.BinaryData.prototype.readBoolean = function() {
   
-  return !!this.getTypedArray()[this._position++];
+  return Boolean(this.readUnsignedByte());
 };
 
 
@@ -335,7 +328,9 @@ org.apache.royale.utils.BinaryData.prototype.readBoolean = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readByte = function() {
   
-  return this.readUnsignedByte() << 24 >> 24;
+  var /** @type {Int8Array} */ view = new Int8Array(this.ba, this._position, 1);
+  this._position++;
+  return view[0];
 };
 
 
@@ -353,7 +348,9 @@ org.apache.royale.utils.BinaryData.prototype.readByte = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readUnsignedByte = function() {
   
-  return this.getTypedArray()[this._position++];
+  var /** @type {Uint8Array} */ view = new Uint8Array(this.ba, this._position, 1);
+  this._position++;
+  return view[0];
 };
 
 
@@ -432,24 +429,6 @@ org.apache.royale.utils.BinaryData.prototype.getTypedArray = function() {
 
 
 /**
- * @private
- * @type {DataView}
- */
-org.apache.royale.utils.BinaryData.prototype._dataView;
-
-
-/**
- * @private
- * @return {DataView}
- */
-org.apache.royale.utils.BinaryData.prototype.getDataView = function() {
-  if (!this._dataView)
-    this._dataView = new DataView(this.ba);
-  return this._dataView;
-};
-
-
-/**
  *  Writes a byte of binary data at the specified index. Does not change the <code>position</code> property.
  *  This is a method for optimzed writes with no range checking.
  *  If the specified index is out of range, it can throw an error.
@@ -485,7 +464,12 @@ org.apache.royale.utils.BinaryData.prototype.writeByteAt = function(idx, byte) {
  */
 org.apache.royale.utils.BinaryData.prototype.readShort = function() {
   
-  return this.readUnsignedShort() << 16 >> 16;
+  var /** @type {number} */ ret = Number(new Int16Array(this.ba, this._position, 1)[0]);
+  if (!this._sysEndian) {
+    ret = ((((ret & 0xff00) >> 8) | ((ret & 0xff) << 8)) << 16) >> 16;
+  }
+  this._position += 2;
+  return ret;
 };
 
 
@@ -503,12 +487,12 @@ org.apache.royale.utils.BinaryData.prototype.readShort = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readUnsignedInt = function() {
   
-  var /** @type {Uint8Array} */ arr = this.getTypedArray();
-  if (this.endian == org.apache.royale.utils.Endian.BIG_ENDIAN) {
-    return ((arr[this._position++] << 24) >>> 0) + (arr[this._position++] << 16) + (arr[this._position++] << 8) + arr[this._position++];
-  } else {
-    return arr[this._position++] + (arr[this._position++] << 8) + (arr[this._position++] << 16) + ((arr[this._position++] << 24) >>> 0);
+  var /** @type {number} */ ret = Number(new Uint32Array(this.ba, this._position, 1)[0]);
+  if (!this._sysEndian) {
+    ret = (((ret & 0xff000000) >>> 24) | ((ret & 0x00ff0000) >>> 8) | ((ret & 0x0000ff00) << 8) | (ret << 24)) >>> 0;
   }
+  this._position += 4;
+  return ret;
 };
 
 
@@ -526,12 +510,12 @@ org.apache.royale.utils.BinaryData.prototype.readUnsignedInt = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readUnsignedShort = function() {
   
-  var /** @type {Uint8Array} */ arr = this.getTypedArray();
-  if (this.endian == org.apache.royale.utils.Endian.BIG_ENDIAN) {
-    return (arr[this._position++] << 8) + arr[this._position++];
-  } else {
-    return arr[this._position++] + (arr[this._position++] << 8);
+  var /** @type {number} */ ret = Number(new Uint16Array(this.ba, this._position, 1)[0]);
+  if (!this._sysEndian) {
+    ret = ((ret & 0xff00) >> 8) | ((ret & 0xff) << 8);
   }
+  this._position += 2;
+  return ret;
 };
 
 
@@ -549,7 +533,12 @@ org.apache.royale.utils.BinaryData.prototype.readUnsignedShort = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readInt = function() {
   
-  return this.readUnsignedInt() << 32 >> 32;
+  var /** @type {number} */ ret = Number(new Int32Array(this.ba, this._position, 1)[0]);
+  if (!this._sysEndian) {
+    ret = (((ret & 0xff000000) >>> 24) | ((ret & 0x00ff0000) >>> 8) | ((ret & 0x0000ff00) << 8) | (ret << 24)) >> 0;
+  }
+  this._position += 4;
+  return ret;
 };
 
 
@@ -567,7 +556,12 @@ org.apache.royale.utils.BinaryData.prototype.readInt = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readFloat = function() {
   
-  var /** @type {number} */ ret = this.getDataView().getFloat32(this._position, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
+  var /** @type {number} */ ret;
+  if (this._sysEndian) {
+    ret = Number(new Float32Array(this.ba, this._position, 1)[0]);
+  }
+  else
+    ret = new DataView(this.ba).getFloat32(this._position, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
   this._position += 4;
   return ret;
 };
@@ -587,7 +581,11 @@ org.apache.royale.utils.BinaryData.prototype.readFloat = function() {
  */
 org.apache.royale.utils.BinaryData.prototype.readDouble = function() {
   
-  var /** @type {number} */ ret = this.getDataView().getFloat64(this._position, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
+  var /** @type {number} */ ret;
+  if (this._sysEndian)
+    ret = Number(new Float64Array(this.ba, this._position, 1)[0]);
+  else
+    ret = new DataView(this.ba).getFloat64(this._position, this._endian == org.apache.royale.utils.Endian.LITTLE_ENDIAN);
   this._position += 8;
   return ret;
 };
@@ -614,7 +612,6 @@ org.apache.royale.utils.BinaryData.prototype.setBufferSize = function(newSize) {
     if (this._position > newSize)
       this._position = Number(newSize);
     this._typedArray = newView;
-    this._dataView = null;
     this._len = Number(newSize);
   }
 };
@@ -782,7 +779,6 @@ org.apache.royale.utils.BinaryData.prototype.mergeInToArrayBuffer = function(off
     dest.set(newBytes, offset);
     this.ba = dest.buffer;
     this._typedArray = dest;
-    this._dataView = null;
     this._len = mergeUpperBound;
   } else {
     dest = new Uint8Array(this.ba, offset, newContentLength);
@@ -854,7 +850,7 @@ org.apache.royale.utils.BinaryData.prototype.get__endian = function() {
 
 
 org.apache.royale.utils.BinaryData.prototype.set__endian = function(value) {
-  if (value == org.apache.royale.utils.Endian.BIG_ENDIAN || value == org.apache.royale.utils.Endian.LITTLE_ENDIAN) {
+  if (value == org.apache.royale.utils.Endian.BIG_ENDIAN || org.apache.royale.utils.Endian.LITTLE_ENDIAN) {
     this._endian = value;
     this._sysEndian = value == org.apache.royale.utils.Endian["systemEndian"];
     
@@ -965,7 +961,6 @@ org.apache.royale.utils.BinaryData.prototype.ROYALE_REFLECTION_INFO = function (
       return {
         'BinaryData': { type: '', declaredBy: 'org.apache.royale.utils.BinaryData', parameters: function () { return [  { index: 1, type: 'Object', optional: true } ]; }},
         '|fromString': { type: 'org.apache.royale.utils.BinaryData', declaredBy: 'org.apache.royale.utils.BinaryData', parameters: function () { return [  { index: 1, type: 'String', optional: false } ]; }},
-        'toString': { type: 'String', declaredBy: 'org.apache.royale.utils.BinaryData'},
         'writeBoolean': { type: 'void', declaredBy: 'org.apache.royale.utils.BinaryData', parameters: function () { return [  { index: 1, type: 'Boolean', optional: false } ]; }},
         'writeByte': { type: 'void', declaredBy: 'org.apache.royale.utils.BinaryData', parameters: function () { return [  { index: 1, type: 'int', optional: false } ]; }},
         'writeBytes': { type: 'void', declaredBy: 'org.apache.royale.utils.BinaryData', parameters: function () { return [  { index: 1, type: 'org.apache.royale.utils.BinaryData', optional: false },{ index: 2, type: 'uint', optional: true },{ index: 3, type: 'uint', optional: true } ]; }},

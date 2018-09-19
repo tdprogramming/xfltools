@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.core.GroupBase');
-/* Royale Dependency List: org.apache.royale.core.IBeadLayout,org.apache.royale.core.IChild,org.apache.royale.core.ILayoutHost,org.apache.royale.core.IParent,org.apache.royale.core.IStatesImpl,org.apache.royale.core.WrappedHTMLElement,org.apache.royale.events.Event,org.apache.royale.events.ValueChangeEvent,org.apache.royale.events.ValueEvent,org.apache.royale.html.util.addElementToWrapper,org.apache.royale.states.State,org.apache.royale.utils.loadBeadFromValuesManager*/
+/* Royale Dependency List: org.apache.royale.core.IBeadLayout,org.apache.royale.core.IChild,org.apache.royale.core.ILayoutHost,org.apache.royale.core.IParent,org.apache.royale.core.IStatesImpl,org.apache.royale.core.WrappedHTMLElement,org.apache.royale.events.Event,org.apache.royale.events.ValueChangeEvent,org.apache.royale.events.ValueEvent,org.apache.royale.html.util.addElementToWrapper,org.apache.royale.states.State,org.apache.royale.utils.loadBeadFromValuesManager,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.core.UIBase');
 goog.require('org.apache.royale.core.IContainer');
@@ -96,12 +96,11 @@ org.apache.royale.core.GroupBase.prototype.layoutNeeded = function() {
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
  *  @productversion Royale 0.8
- *  @royaleignorecoercion org.apache.royale.core.ILayoutHost
  * @export
- * @return {Object}
+ * @return {org.apache.royale.core.ILayoutHost}
  */
 org.apache.royale.core.GroupBase.prototype.getLayoutHost = function() {
-  return this.view;
+  return org.apache.royale.utils.Language.as(this.view, org.apache.royale.core.ILayoutHost);
 };
 
 

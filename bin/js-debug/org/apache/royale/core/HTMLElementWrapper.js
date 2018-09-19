@@ -111,7 +111,6 @@ org.apache.royale.core.HTMLElementWrapper.prototype._beads;
 
 /**
  * @asparam bead The new bead.
- * @royaleignorecoercion org.apache.royale.core.IBeadModel 
  * @export
  * @param {org.apache.royale.core.IBead} bead
  */
@@ -121,7 +120,7 @@ org.apache.royale.core.HTMLElementWrapper.prototype.addBead = function(bead) {
   }
   this._beads.push(bead);
   if (org.apache.royale.utils.Language.is(bead, org.apache.royale.core.IBeadModel)) {
-    this._model = bead;
+    this._model = org.apache.royale.utils.Language.as(bead, org.apache.royale.core.IBeadModel);
   }
   bead.strand = this;
 };
@@ -220,14 +219,13 @@ org.apache.royale.core.HTMLElementWrapper.prototype.hasEventListener = function(
 
 
 /**
- * @royaleignorecoercion String
  * @export
  * @override
  */
 org.apache.royale.core.HTMLElementWrapper.prototype.dispatchEvent = function(e) {
   var /** @type {string} */ eventType = "";
   if (typeof(e) === 'string') {
-    eventType = e;
+    eventType = org.apache.royale.utils.Language.as(e, String);
     if (e === org.apache.royale.events.Event.CHANGE) {
       e = org.apache.royale.events.utils.EventUtils.createEvent(eventType, e.bubbles);
     }
@@ -249,7 +247,6 @@ org.apache.royale.core.HTMLElementWrapper.prototype.dispatchEvent = function(e) 
 
 
 /**
- * @royaleignorecoercion org.apache.royale.events.IEventDispatcher
  * @export
  * @param {Object} source
  * @param {Object} e
@@ -257,10 +254,10 @@ org.apache.royale.core.HTMLElementWrapper.prototype.dispatchEvent = function(e) 
  */
 org.apache.royale.core.HTMLElementWrapper.prototype.dispatchBubblingEvent = function(source, e) {
   var /** @type {Array} */ ancestorsTree = [];
-  var /** @type {Object} */ t = source["parent"];
+  var /** @type {org.apache.royale.events.IEventDispatcher} */ t = org.apache.royale.utils.Language.as(source["parent"], org.apache.royale.events.IEventDispatcher);
   while (t != null) {
     ancestorsTree.push(t);
-    t = t["parent"];
+    t = org.apache.royale.utils.Language.as(t["parent"], org.apache.royale.events.IEventDispatcher);
   }
   return goog.events.EventTarget.dispatchEventInternal_(source, e, ancestorsTree);
 };
@@ -290,7 +287,7 @@ org.apache.royale.core.HTMLElementWrapper.prototype.get__model = function() {
 org.apache.royale.core.HTMLElementWrapper.prototype.set__model = function(value) {
   if (this._model != value) {
     if (org.apache.royale.utils.Language.is(value, org.apache.royale.core.IBead))
-      this.addBead(value);
+      this.addBead(org.apache.royale.utils.Language.as(value, org.apache.royale.core.IBead));
     else
       this._model = value;
     this.dispatchEvent(new org.apache.royale.events.Event("modelChanged"));

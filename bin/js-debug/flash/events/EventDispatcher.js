@@ -24,7 +24,6 @@ goog.require('org.xfltools.core.FlashJSObject');
 flash.events.EventDispatcher = function(target) {
   flash.events.EventDispatcher.base(this, 'constructor');
   target = typeof target !== 'undefined' ? target : null;
-  org.apache.royale.utils.Language.trace("This trace makes the compiler include a Language dependency. Please do not remove for now.");
   this._javascriptImplementation = window["flashjs_events_EventDispatcher_construct"]();
   this._eventListeners = org.apache.royale.utils.Language.Vector();
 };

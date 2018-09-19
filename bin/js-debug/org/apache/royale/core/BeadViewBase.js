@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.core.BeadViewBase');
-/* Royale Dependency List: org.apache.royale.core.IStrand,org.apache.royale.core.IUIBase*/
+/* Royale Dependency List: org.apache.royale.core.IStrand,org.apache.royale.core.IUIBase,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.events.EventDispatcher');
 goog.require('org.apache.royale.core.IBeadView');
@@ -51,7 +51,7 @@ org.apache.royale.core.BeadViewBase.prototype.set__strand = function(value) {
 
 
 org.apache.royale.core.BeadViewBase.prototype.get__host = function() {
-  return this._strand;
+  return org.apache.royale.utils.Language.as(this._strand, org.apache.royale.core.IUIBase);
 };
 
 

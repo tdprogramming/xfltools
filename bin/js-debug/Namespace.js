@@ -4,19 +4,15 @@
  *
  * @fileoverview
  *
- * @suppress {checkTypes|accessControls}
+ * @suppress {missingRequire|checkTypes|accessControls}
  */
 
 goog.provide('Namespace');
-/* Royale Dependency List: */
-/* Royale Static Dependency List: org.apache.royale.utils.Language*/
-
-goog.require('org.apache.royale.utils.Language');
+/* Royale Dependency List: org.apache.royale.utils.Language*/
 
 
 
 /**
- * @royaleignorecoercion Namespace
  * @constructor
  * @param {Object=} prefixOrUri
  * @param {Object=} uriValue
@@ -27,8 +23,8 @@ Namespace = function(prefixOrUri, uriValue) {
   if (!uriValue && prefixOrUri) {
     var /** @type {Object} */ uriVal = uriValue ? uriValue : prefixOrUri;
     if (org.apache.royale.utils.Language.is(uriVal, Namespace)) {
-      this._prefix = uriVal.prefix;
-      this._uri = uriVal.uri;
+      this._prefix = org.apache.royale.utils.Language.as(uriVal, Namespace).prefix;
+      this._uri = org.apache.royale.utils.Language.as(uriVal, Namespace).uri;
     } else if (this.isQName(uriVal)) {
       this._uri = org.apache.royale.utils.Language.string(uriVal.uri ? uriVal.uri : this._uri);
     } else {
@@ -105,13 +101,6 @@ Namespace.prototype.toString = function() {
 Namespace.prototype.valueOf = function() {
   return this;
 };
-
-
-/**
- * @private
- * @type {Object}
- */
-Namespace.forceLanguageDependency = org.apache.royale.utils.Language;
 
 
 Namespace.prototype.get__uri = function() {

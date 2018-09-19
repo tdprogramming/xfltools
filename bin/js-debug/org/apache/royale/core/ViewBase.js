@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.core.ViewBase');
-/* Royale Dependency List: org.apache.royale.core.IParent,org.apache.royale.events.Event*/
+/* Royale Dependency List: org.apache.royale.events.Event*/
 
 goog.require('org.apache.royale.core.GroupBase');
 goog.require('org.apache.royale.core.IApplicationView');
@@ -59,23 +59,13 @@ org.apache.royale.core.ViewBase.prototype.set__applicationModel = function(value
 };
 
 
-org.apache.royale.core.ViewBase.prototype.get__popUpParent = function() {
-  return this;
-};
-
-
 Object.defineProperties(org.apache.royale.core.ViewBase.prototype, /** @lends {org.apache.royale.core.ViewBase.prototype} */ {
 /**
   * @export
   * @type {Object} */
 applicationModel: {
 get: org.apache.royale.core.ViewBase.prototype.get__applicationModel,
-set: org.apache.royale.core.ViewBase.prototype.set__applicationModel},
-/**
-  * @export
-  * @type {org.apache.royale.core.IParent} */
-popUpParent: {
-get: org.apache.royale.core.ViewBase.prototype.get__popUpParent}}
+set: org.apache.royale.core.ViewBase.prototype.set__applicationModel}}
 );
 
 
@@ -98,8 +88,7 @@ org.apache.royale.core.ViewBase.prototype.ROYALE_REFLECTION_INFO = function () {
     variables: function () {return {};},
     accessors: function () {
       return {
-        'applicationModel': { type: 'Object', access: 'readwrite', declaredBy: 'org.apache.royale.core.ViewBase', metadata: function () { return [ { name: 'Bindable', args: [ { key: '', value: 'modelChanged' } ] } ]; }},
-        'popUpParent': { type: 'org.apache.royale.core.IParent', access: 'readonly', declaredBy: 'org.apache.royale.core.ViewBase'}
+        'applicationModel': { type: 'Object', access: 'readwrite', declaredBy: 'org.apache.royale.core.ViewBase', metadata: function () { return [ { name: 'Bindable', args: [ { key: '', value: 'modelChanged' } ] } ]; }}
       };
     },
     methods: function () {

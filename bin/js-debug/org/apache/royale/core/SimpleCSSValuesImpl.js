@@ -22,7 +22,7 @@ goog.require('org.apache.royale.core.ICSSImpl');
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @constructor
  * @extends {org.apache.royale.events.EventDispatcher}
  * @implements {org.apache.royale.core.IBorderPaddingMarginValuesImpl}
@@ -175,9 +175,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.values;
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
- *  @royaleignorecoercion org.apache.royale.core.IStyleableObject
- *  @royaleignorecoercion org.apache.royale.core.IChild
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} thisObject
  * @param {string} valueName
@@ -198,7 +196,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getValue = function(thisObj
   var /** @type {string} */ className;
   var /** @type {string} */ selectorName;
   if (org.apache.royale.utils.Language.is(thisObject, org.apache.royale.core.IStyleableObject)) {
-    var /** @type {Object} */ styleable = thisObject;
+    var /** @type {org.apache.royale.core.IStyleableObject} */ styleable = org.apache.royale.utils.Language.as(thisObject, org.apache.royale.core.IStyleableObject, true);
     if (styleable.style != null) {
       
       value = styleable.style[valueName];
@@ -295,7 +293,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getValue = function(thisObj
     className = org.apache.royale.utils.Language.string(thisInstance.ROYALE_CLASS_INFO.names[0].qName);
   }
   if (org.apache.royale.core.SimpleCSSValuesImpl.inheritingStyles[valueName] !== undefined && org.apache.royale.utils.Language.is(thisObject, org.apache.royale.core.IChild)) {
-    var /** @type {Object} */ parentObject = thisObject.parent;
+    var /** @type {Object} */ parentObject = org.apache.royale.utils.Language.as(thisObject, org.apache.royale.core.IChild, true).parent;
     if (parentObject)
       return this.getValue(parentObject, valueName, state, attrs);
   }
@@ -309,7 +307,6 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getValue = function(thisObj
 
 
 /**
- * @royaleignorecoercion org.apache.royale.core.IChild
  * @private
  * @param {Object} thisObject
  * @param {string} valueName
@@ -322,7 +319,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getInheritingValue = functi
   attrs = typeof attrs !== 'undefined' ? attrs : null;
   var /** @type {*} */ value;
   if (org.apache.royale.utils.Language.is(thisObject, org.apache.royale.core.IChild)) {
-    var /** @type {Object} */ parentObject = thisObject.parent;
+    var /** @type {Object} */ parentObject = org.apache.royale.utils.Language.as(thisObject, org.apache.royale.core.IChild, true).parent;
     if (parentObject) {
       value = this.getValue(parentObject, valueName, state, attrs);
       if (value === org.apache.royale.core.SimpleCSSValuesImpl.INHERIT || value === undefined) {
@@ -349,7 +346,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getInheritingValue = functi
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} thisObject
  * @param {string} valueName
@@ -375,7 +372,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.setValue = function(thisObj
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} thisObject
  * @param {string} valueName
@@ -399,9 +396,8 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.newInstance = function(this
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  *  @royaleignorecoercion Function
- *  @royaleignorecoercion org.apache.royale.core.IDocument
  * @export
  * @param {string} valueName
  * @return {Object}
@@ -415,7 +411,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getInstance = function(valu
     i =  /** @type {Function} */ (o);
   if (i) {
     o[valueName] = new i();
-    var /** @type {Object} */ d = o[valueName];
+    var /** @type {org.apache.royale.core.IDocument} */ d = org.apache.royale.utils.Language.as(o[valueName], org.apache.royale.core.IDocument);
     if (d)
       d.setDocument(this.mainClass);
   }
@@ -429,7 +425,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getInstance = function(valu
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} value
  * @return {number}
@@ -445,7 +441,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.convertColor = function(val
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {string} styles
  * @return {Object}
@@ -501,7 +497,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.parseStyles = function(styl
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  *
  *  @royaleignorecoercion HTMLStyleElement
  *  @royaleignorecoercion CSSStyleSheet
@@ -639,7 +635,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.computedStyles;
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  *  @royaleignorecoercion String
  * @export
  * @param {org.apache.royale.core.IUIBase} object
@@ -674,7 +670,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getBorderStyles = function(
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {org.apache.royale.core.IUIBase} object
  * @param {string=} state
@@ -708,7 +704,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getBorderMetrics = function
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {org.apache.royale.core.IUIBase} object
  * @param {number=} hostWidth
@@ -746,7 +742,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getPaddingMetrics = functio
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {org.apache.royale.core.IUIBase} object
  * @param {number=} hostWidth
@@ -864,7 +860,7 @@ org.apache.royale.core.SimpleCSSValuesImpl.prototype.getPositions = function(chi
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.8
+ *  @productversion Royale 0.0
  * @export
  * @param {org.apache.royale.core.IUIBase} object
  * @param {number=} hostWidth

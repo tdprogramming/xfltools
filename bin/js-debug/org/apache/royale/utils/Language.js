@@ -8,7 +8,8 @@
  */
 
 goog.provide('org.apache.royale.utils.Language');
-/* Royale Dependency List: org.apache.royale.utils.Language*/
+/* Royale Dependency List: goog.DEBUG,org.apache.royale.utils.Language*/
+
 
 
 
@@ -75,7 +76,7 @@ org.apache.royale.utils.Language.as = function(leftOperand, rightOperand, coerci
   var /** @type {Error} */ error, /** @type {boolean} */ itIs, /** @type {string} */ message;
   coercion = (coercion !== undefined) ? coercion : false;
   itIs = org.apache.royale.utils.Language.is(leftOperand, rightOperand);
-  if (!itIs && coercion && leftOperand) {
+  if (!itIs && coercion) {
     message = 'Type Coercion failed';
     if (TypeError) {
       error = new TypeError(message);
@@ -137,12 +138,11 @@ org.apache.royale.utils.Language.is = function(leftOperand, rightOperand) {
     return true;
   if (rightOperand === Object)
     return true;
-  var /** @type {string} */ theType = typeof(leftOperand);
-  if (theType === 'string')
+  if (typeof(leftOperand) === 'string')
     return rightOperand === String;
-  if (theType === 'number')
+  if (typeof(leftOperand) === 'number')
     return rightOperand === Number;
-  if (theType === 'boolean')
+  if (typeof(leftOperand) === 'boolean')
     return rightOperand === Boolean;
   if (rightOperand === Array)
     return Array.isArray(leftOperand);
@@ -153,7 +153,8 @@ org.apache.royale.utils.Language.is = function(leftOperand, rightOperand) {
       return true;
     }
   }
-  superClass = leftOperand.constructor.superClass_;
+  superClass = leftOperand.constructor;
+  superClass = superClass.superClass_;
   if (superClass) {
     while (superClass && superClass.ROYALE_CLASS_INFO) {
       if (superClass.ROYALE_CLASS_INFO.interfaces) {
@@ -161,7 +162,8 @@ org.apache.royale.utils.Language.is = function(leftOperand, rightOperand) {
           return true;
         }
       }
-      superClass = superClass.constructor.superClass_;
+      superClass = superClass.constructor;
+      superClass = superClass.superClass_;
     }
   }
   return false;
@@ -215,14 +217,14 @@ org.apache.royale.utils.Language.prototype.asClass = function(classDef) {
 
 
 /**
- * @royaledebug
  * @export
  * @param {...} rest
  */
 org.apache.royale.utils.Language.trace = function(rest) {
-  rest = rest;if(!goog.DEBUG)return;
   rest = Array.prototype.slice.call(arguments, 0);
   var /** @type {*} */ theConsole;
+  if (!goog.DEBUG)
+    return;
   theConsole = goog.global["console"];
   if (theConsole === undefined) {
     if (typeof(window) !== "undefined") {

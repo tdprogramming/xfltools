@@ -14,7 +14,6 @@ goog.provide('QName');
 
 
 /**
- * @royaleignorecoercion Namespace
  * @constructor
  * @param {*=} qNameOrUri
  * @param {*=} localNameVal
@@ -22,22 +21,20 @@ goog.provide('QName');
 QName = function(qNameOrUri, localNameVal) {
   qNameOrUri = typeof qNameOrUri !== 'undefined' ? qNameOrUri : null;
   localNameVal = typeof localNameVal !== 'undefined' ? localNameVal : null;
-  if (qNameOrUri != null) {
-    if (org.apache.royale.utils.Language.is(qNameOrUri, QName)) {
-      this._uri = org.apache.royale.utils.Language.string(qNameOrUri.uri);
-      this._localName = org.apache.royale.utils.Language.string(qNameOrUri.localName);
-      this._prefix = org.apache.royale.utils.Language.string(qNameOrUri.prefix);
-    } else if (org.apache.royale.utils.Language.is(qNameOrUri, Namespace)) {
-      this._uri = qNameOrUri.uri;
-      this._prefix = qNameOrUri.prefix;
-      if (localNameVal)
-        this._localName = localNameVal.toString();
-    } else if (localNameVal) {
-      this._localName = org.apache.royale.utils.Language.string(localNameVal);
-      this._uri = org.apache.royale.utils.Language.string(qNameOrUri);
-    } else if (qNameOrUri && qNameOrUri.toString()) {
-      this._localName = qNameOrUri.toString();
-    }
+  if (org.apache.royale.utils.Language.is(qNameOrUri, QName)) {
+    this._uri = org.apache.royale.utils.Language.string(qNameOrUri.uri);
+    this._localName = org.apache.royale.utils.Language.string(qNameOrUri.localName);
+    this._prefix = org.apache.royale.utils.Language.string(qNameOrUri.prefix);
+  } else if (org.apache.royale.utils.Language.is(qNameOrUri, Namespace)) {
+    this._uri = org.apache.royale.utils.Language.as(qNameOrUri, Namespace).uri;
+    this._prefix = org.apache.royale.utils.Language.as(qNameOrUri, Namespace).prefix;
+    if (localNameVal)
+      this._localName = localNameVal.toString();
+  } else if (localNameVal) {
+    this._localName = org.apache.royale.utils.Language.string(localNameVal);
+    this._uri = org.apache.royale.utils.Language.string(qNameOrUri);
+  } else if (qNameOrUri && qNameOrUri.toString()) {
+    this._localName = qNameOrUri.toString();
   }
 };
 

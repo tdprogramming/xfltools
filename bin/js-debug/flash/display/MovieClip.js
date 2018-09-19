@@ -8,7 +8,7 @@
  */
 
 goog.provide('flash.display.MovieClip');
-/* Royale Dependency List: com.greensock.TimelineLite,flash.display.DisplayObject,flash.display.Scene,org.apache.royale.utils.Language,XML*/
+/* Royale Dependency List: flash.display.DisplayObject,flash.display.Scene,flash.utils.Dictionary,XML*/
 
 goog.require('flash.display.Sprite');
 
@@ -20,7 +20,8 @@ goog.require('flash.display.Sprite');
  */
 flash.display.MovieClip = function() {
   flash.display.MovieClip.base(this, 'constructor');
-  this._timeline = new com.greensock.TimelineLite({onComplete:org.apache.royale.utils.Language.closure(this.restartTimeline, this, 'restartTimeline'), onCompleteScope:this});
+  this._timeline = window["flashjs_display_MovieClip_getTimeline"]();
+  this._tweensByDisplayObject = new flash.utils.Dictionary();
 };
 goog.inherits(flash.display.MovieClip, flash.display.Sprite);
 
@@ -40,17 +41,16 @@ flash.display.MovieClip.prototype._currentFrame = 0;
 
 /**
  * @private
- * @type {com.greensock.TimelineLite}
+ * @type {Object}
  */
 flash.display.MovieClip.prototype._timeline;
 
 
 /**
  * @private
+ * @type {flash.utils.Dictionary}
  */
-flash.display.MovieClip.prototype.restartTimeline = function() {
-  this._timeline.restart();
-};
+flash.display.MovieClip.prototype._tweensByDisplayObject;
 
 
 /**
@@ -60,7 +60,12 @@ flash.display.MovieClip.prototype.restartTimeline = function() {
  * @param {number} duration
  */
 flash.display.MovieClip.prototype.tweenChild = function(child, props, duration) {
-  this._timeline.to(child, duration, props);
+  if (this._tweensByDisplayObject[child] == null) {
+    this._tweensByDisplayObject[child] = window["flashjs_display_MovieClip_getTween"](child);
+    this._timeline.addTween(this._tweensByDisplayObject[child]);
+  }
+  this._tweensByDisplayObject[child].to(props, duration * 1000);
+  this._timeline.updateDuration();
 };
 
 

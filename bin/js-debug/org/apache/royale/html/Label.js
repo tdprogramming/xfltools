@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.html.Label');
-/* Royale Dependency List: org.apache.royale.core.WrappedHTMLElement,org.apache.royale.html.util.addElementToWrapper*/
+/* Royale Dependency List: org.apache.royale.core.WrappedHTMLElement,org.apache.royale.html.util.addElementToWrapper,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.core.UIBase');
 
@@ -52,13 +52,13 @@ org.apache.royale.html.Label.prototype._text = "";
 
 
 /**
- * @royaleignorecoercion Text
+ * @royaleignorecoercion org.apache.royale.core.WrappedHTMLElement
  * @protected
  * @override
  */
 org.apache.royale.html.Label.prototype.createElement = function() {
   org.apache.royale.html.util.addElementToWrapper(this, 'span');
-  this.textNode = document.createTextNode(this._text);
+  this.textNode = org.apache.royale.utils.Language.as(document.createTextNode(this._text), Text);
   this.element.appendChild(this.textNode);
   this.element.style.whiteSpace = "nowrap";
   return this.element;

@@ -44,7 +44,6 @@ package org.xfltools.display
 		
 		private function onLoadComplete(event:Event):void
 		{
-			trace("Load complete!");
 			_urlLoader.removeEventListener(Event.COMPLETE, onLoadComplete);
 			
 			_xml = new XML(_urlLoader.data);

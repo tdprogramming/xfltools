@@ -49,22 +49,16 @@ org.apache.royale.utils.PointUtils.globalToLocal = function(pt, local) {
   var /** @type {number} */ x = pt.x;
   var /** @type {number} */ y = pt.y;
   var /** @type {HTMLElement} */ element = local.element;
-  if (org.apache.royale.utils.Language.closure(element.getBoundingClientRect, element, 'getBoundingClientRect')) {
-    var /** @type {Object} */ rect = element.getBoundingClientRect();
-    x = x - rect.left - window.scrollX;
-    y = y - rect.top - window.scrollY;
-  } else {
-    do {
-      x -= element.offsetLeft;
-      y -= element.offsetTop;
-      if (local['parent'] !== undefined) {
-        local = local.parent;
-        element = local ? local.element : null;
-      } else {
-        element = null;
-      }
-    } while (element);
-  }
+  do {
+    x -= element.offsetLeft;
+    y -= element.offsetTop;
+    if (local['parent'] !== undefined) {
+      local = local.parent;
+      element = local ? local.element : null;
+    } else {
+      element = null;
+    }
+  } while (element);
   return new org.apache.royale.geom.Point(x, y);
 };
 
@@ -92,8 +86,8 @@ org.apache.royale.utils.PointUtils.localToGlobal = function(pt, local) {
   var /** @type {HTMLElement} */ element = local.element;
   if (org.apache.royale.utils.Language.closure(element.getBoundingClientRect, element, 'getBoundingClientRect')) {
     var /** @type {Object} */ rect = element.getBoundingClientRect();
-    x = Number(rect.left + x + window.scrollX);
-    y = Number(rect.top + y + window.scrollY);
+    x = Number(rect.left + x);
+    y = Number(rect.top + y);
   } else {
     do {
       x += element.offsetLeft;

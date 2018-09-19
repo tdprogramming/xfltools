@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.html.beads.ContainerView');
-/* Royale Dependency List: org.apache.royale.core.IContainer,org.apache.royale.core.ILayoutView,org.apache.royale.core.IStrand,org.apache.royale.core.IViewport,org.apache.royale.utils.loadBeadFromValuesManager*/
+/* Royale Dependency List: org.apache.royale.core.IContainer,org.apache.royale.core.ILayoutView,org.apache.royale.core.IStrand,org.apache.royale.core.IViewport,org.apache.royale.utils.loadBeadFromValuesManager,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.html.beads.GroupView');
 
@@ -44,9 +44,9 @@ org.apache.royale.html.beads.ContainerView.prototype.get__viewport = function() 
 
 org.apache.royale.html.beads.ContainerView.prototype.get__contentView = function() {
   if (this.viewport != null) {
-    return this.viewport.contentView;
+    return org.apache.royale.utils.Language.as(this.viewport.contentView, org.apache.royale.core.ILayoutView);
   } else {
-    return this.host;
+    return org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutView);
   }
 };
 
@@ -55,9 +55,9 @@ org.apache.royale.html.beads.ContainerView.prototype.set__strand = function(valu
   this._strand = value;
   org.apache.royale.html.beads.ContainerView.superClass_.set__strand.apply(this, [ value] );
   if (!this._viewport)
-    this._viewport = org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IViewport, "iViewport", this._strand);
+    this._viewport = org.apache.royale.utils.Language.as(org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IViewport, "iViewport", this._strand), org.apache.royale.core.IViewport);
   if (this._viewport) {
-    var /** @type {org.apache.royale.core.IContainer} */ chost = this.host;
+    var /** @type {org.apache.royale.core.IContainer} */ chost = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.IContainer);
     if (chost != null && chost != this._viewport.contentView) {
       chost.addElement(this._viewport.contentView);
     }

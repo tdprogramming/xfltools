@@ -22,23 +22,23 @@
   </moonshineResourcePaths>
   <moonshineNativeExtensionPaths></moonshineNativeExtensionPaths>
   <build>
-    <option es="False"/>
     <option showActionScriptWarnings="True"/>
     <option staticLinkRSL="False"/>
     <option showBindingWarnings="True"/>
     <option compilerConstants=""/>
     <option showDeprecationWarnings="True"/>
-    <option antBuildPath="build/build.xml"/>
+    <option antBuildPath=""/>
+    <option additional="-html-template=js-src/html-template.html"/>
     <option showUnusedTypeSelectorWarnings="True"/>
-    <option customSDK="C:\Users\Tim\Documents\SDKs\apache-royale-0.9.4-bin-js-swf\royale-asjs"/>
+    <option customSDK="C:\Users\Tim\Documents\SDKs\apache-royale-0.9.2-bin-js-swf\royale-asjs"/>
     <option locale=""/>
     <option accessible="False"/>
-    <option additional="-html-template=js-src/html-template.html"/>
+    <option useNetwork="True"/>
     <option allowSourcePathOverlap="False"/>
     <option useResourceBundleMetadata="True"/>
     <option strict="True"/>
     <option warnings="True"/>
-    <option useNetwork="True"/>
+    <option es="False"/>
     <option verboseStackTraces="False"/>
     <option loadConfig=""/>
     <option linkReport=""/>
@@ -60,20 +60,21 @@
   <hiddenPaths></hiddenPaths>
   <preBuildCommand>null</preBuildCommand>
   <postBuildCommand alwaysRun="False">null</postBuildCommand>
+  <trustSVNCertificate>False</trustSVNCertificate>
   <options>
     <option showHiddenPaths="False"/>
+    <option visualEditorExportPath=""/>
+    <option isPrimeFacesVisualEditor="False"/>
     <option testMovie=""/>
     <option testMovieCommand=""/>
     <option defaultBuildTargets=""/>
     <option isExportedToExistingSource="False"/>
-    <option visualEditorExportPath=""/>
-    <option isPrimeFacesVisualEditor="False"/>
   </options>
   <moonshineRunCustomization>
     <option projectType="2"/>
     <option launchMethod="Simulator"/>
-    <option targetPlatform="2"/>
     <option urlToLaunch="C:\Users\Tim\Documents\projects\XFLTools\bin\js-debug\index.html"/>
+    <option targetPlatform="2"/>
     <option deviceSimulator="null"/>
     <deviceSimulator>null</deviceSimulator>
     <certAndroid>null</certAndroid>

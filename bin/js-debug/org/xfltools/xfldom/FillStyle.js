@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.xfldom.FillStyle');
-/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.IGraphicsData,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.SolidColor,org.apache.royale.utils.Language*/
+/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.IGraphicsData,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.SolidColor*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
 goog.require('org.xfltools.xfldom.IGraphicsDrawable');
@@ -75,7 +75,6 @@ org.xfltools.xfldom.FillStyle.prototype.toGraphicsData = function() {
   {
   var solidColor = foreachiter1_target[foreachiter1];
   {
-    org.apache.royale.utils.Language.trace("Solid fill color: " + solidColor.color + " and alpha: " + solidColor.alpha);
     var /** @type {flash.display.GraphicsSolidFill} */ solidFill = new flash.display.GraphicsSolidFill(solidColor.color, solidColor.alpha);
     graphicsData.push(solidFill);
   }}

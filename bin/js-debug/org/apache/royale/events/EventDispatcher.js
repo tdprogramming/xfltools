@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.events.EventDispatcher');
-/* Royale Dependency List: goog.events,org.apache.royale.events.Event*/
+/* Royale Dependency List: goog.events,org.apache.royale.events.Event,org.apache.royale.utils.Language*/
 
 goog.require('goog.events.EventTarget');
 goog.require('org.apache.royale.events.IEventDispatcher');
@@ -24,7 +24,7 @@ goog.require('org.apache.royale.events.IEventDispatcher');
 org.apache.royale.events.EventDispatcher = function(target) {
   org.apache.royale.events.EventDispatcher.base(this, 'constructor');
   target = typeof target !== 'undefined' ? target : null;
-  this._dispatcher = target || this;
+  this._target = target || this;
 };
 goog.inherits(org.apache.royale.events.EventDispatcher, goog.events.EventTarget);
 
@@ -39,7 +39,7 @@ goog.exportSymbol('org.apache.royale.events.EventDispatcher', org.apache.royale.
  * @private
  * @type {org.apache.royale.events.IEventDispatcher}
  */
-org.apache.royale.events.EventDispatcher.prototype._dispatcher;
+org.apache.royale.events.EventDispatcher.prototype._target;
 
 
 /**
@@ -60,10 +60,10 @@ org.apache.royale.events.EventDispatcher.prototype.dispatchEvent = function(even
   try {
     if (event) {
       if (typeof(event) == "string") {
-        event = new org.apache.royale.events.Event("" + event);
-        event.target = this._dispatcher;
+        event = new org.apache.royale.events.Event(org.apache.royale.utils.Language.as(event, String));
+        event.target = this._target;
       } else if ("target" in event) {
-        event.target = this._dispatcher;
+        event.target = this._target;
       }
     }
     else

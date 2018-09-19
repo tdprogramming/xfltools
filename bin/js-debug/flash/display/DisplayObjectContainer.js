@@ -8,7 +8,7 @@
  */
 
 goog.provide('flash.display.DisplayObjectContainer');
-/* Royale Dependency List: flash.display.DisplayObject,flash.geom.Point,flash.text.TextSnapshot,org.xfltools.core.ApplicationFactory,org.apache.royale.utils.Language,XML*/
+/* Royale Dependency List: flash.display.DisplayObject,flash.geom.Point,flash.text.TextSnapshot,org.xfltools.core.ApplicationFactory,XML*/
 
 goog.require('flash.display.InteractiveObject');
 
@@ -20,7 +20,6 @@ goog.require('flash.display.InteractiveObject');
  */
 flash.display.DisplayObjectContainer = function() {
   flash.display.DisplayObjectContainer.base(this, 'constructor');
-  org.apache.royale.utils.Language.trace("Construct DO Container");
   this._children = [];
   this._javascriptImplementation = window["flashjs_display_DisplayObjectContainer_construct"]();
   this.startFrameTicker();

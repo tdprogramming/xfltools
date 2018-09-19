@@ -11,7 +11,7 @@ goog.provide('org.apache.royale.core.ContainerBase');
 /* Royale Dependency List: org.apache.royale.core.ContainerBaseStrandChildren,org.apache.royale.core.IChild,org.apache.royale.core.IParent*/
 
 goog.require('org.apache.royale.core.GroupBase');
-goog.require('org.apache.royale.core.IContainerBaseStrandChildrenHost');
+goog.require('org.apache.royale.core.IStrandPrivate');
 
 
 
@@ -24,7 +24,7 @@ goog.require('org.apache.royale.core.IContainerBaseStrandChildrenHost');
  *  @productversion Royale 0.0
  * @constructor
  * @extends {org.apache.royale.core.GroupBase}
- * @implements {org.apache.royale.core.IContainerBaseStrandChildrenHost}
+ * @implements {org.apache.royale.core.IStrandPrivate}
  */
 org.apache.royale.core.ContainerBase = function() {
   org.apache.royale.core.ContainerBase.base(this, 'constructor');
@@ -43,6 +43,18 @@ goog.exportSymbol('org.apache.royale.core.ContainerBase', org.apache.royale.core
  * @type {org.apache.royale.core.ContainerBaseStrandChildren}
  */
 org.apache.royale.core.ContainerBase.prototype._strandChildren;
+
+
+/**
+ * @asprivate
+ * @suppress {undefinedNames}
+ * Support strandChildren.
+ * @export
+ * @return {number}
+ */
+org.apache.royale.core.ContainerBase.prototype.$numElements = function() {
+  return org.apache.royale.core.ContainerBase.superClass_.get__numElements.apply(this);
+};
 
 
 /**
@@ -122,22 +134,12 @@ org.apache.royale.core.ContainerBase.prototype.get__strandChildren = function() 
 };
 
 
-org.apache.royale.core.ContainerBase.prototype.get__$numElements = function() {
-  return org.apache.royale.core.ContainerBase.superClass_.get__numElements.apply(this);
-};
-
-
 Object.defineProperties(org.apache.royale.core.ContainerBase.prototype, /** @lends {org.apache.royale.core.ContainerBase.prototype} */ {
 /**
   * @export
   * @type {org.apache.royale.core.IParent} */
 strandChildren: {
-get: org.apache.royale.core.ContainerBase.prototype.get__strandChildren},
-/**
-  * @export
-  * @type {number} */
-$numElements: {
-get: org.apache.royale.core.ContainerBase.prototype.get__$numElements}}
+get: org.apache.royale.core.ContainerBase.prototype.get__strandChildren}}
 );
 
 
@@ -146,7 +148,7 @@ get: org.apache.royale.core.ContainerBase.prototype.get__$numElements}}
  *
  * @type {Object.<string, Array.<Object>>}
  */
-org.apache.royale.core.ContainerBase.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'ContainerBase', qName: 'org.apache.royale.core.ContainerBase', kind: 'class' }], interfaces: [org.apache.royale.core.IContainerBaseStrandChildrenHost] };
+org.apache.royale.core.ContainerBase.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'ContainerBase', qName: 'org.apache.royale.core.ContainerBase', kind: 'class' }], interfaces: [org.apache.royale.core.IStrandPrivate] };
 
 
 
@@ -160,13 +162,13 @@ org.apache.royale.core.ContainerBase.prototype.ROYALE_REFLECTION_INFO = function
     variables: function () {return {};},
     accessors: function () {
       return {
-        'strandChildren': { type: 'org.apache.royale.core.IParent', access: 'readonly', declaredBy: 'org.apache.royale.core.ContainerBase'},
-        '$numElements': { type: 'int', access: 'readonly', declaredBy: 'org.apache.royale.core.ContainerBase'}
+        'strandChildren': { type: 'org.apache.royale.core.IParent', access: 'readonly', declaredBy: 'org.apache.royale.core.ContainerBase'}
       };
     },
     methods: function () {
       return {
         'ContainerBase': { type: '', declaredBy: 'org.apache.royale.core.ContainerBase'},
+        '$numElements': { type: 'int', declaredBy: 'org.apache.royale.core.ContainerBase'},
         '$addElement': { type: 'void', declaredBy: 'org.apache.royale.core.ContainerBase', parameters: function () { return [  { index: 1, type: 'org.apache.royale.core.IChild', optional: false },{ index: 2, type: 'Boolean', optional: true } ]; }},
         '$addElementAt': { type: 'void', declaredBy: 'org.apache.royale.core.ContainerBase', parameters: function () { return [  { index: 1, type: 'org.apache.royale.core.IChild', optional: false },{ index: 2, type: 'int', optional: false },{ index: 3, type: 'Boolean', optional: true } ]; }},
         '$removeElement': { type: 'void', declaredBy: 'org.apache.royale.core.ContainerBase', parameters: function () { return [  { index: 1, type: 'org.apache.royale.core.IChild', optional: false },{ index: 2, type: 'Boolean', optional: true } ]; }},

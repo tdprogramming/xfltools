@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.apache.royale.html.supportClasses.Viewport');
-/* Royale Dependency List: org.apache.royale.core.IContentView,org.apache.royale.core.IStrand,org.apache.royale.core.IUIBase,org.apache.royale.core.UIBase,org.apache.royale.geom.Size,org.apache.royale.utils.loadBeadFromValuesManager*/
+/* Royale Dependency List: org.apache.royale.core.IContentView,org.apache.royale.core.IStrand,org.apache.royale.core.IUIBase,org.apache.royale.core.UIBase,org.apache.royale.geom.Size,org.apache.royale.utils.loadBeadFromValuesManager,org.apache.royale.utils.Language*/
 
 goog.require('org.apache.royale.events.EventDispatcher');
 goog.require('org.apache.royale.core.IBead');
@@ -108,9 +108,9 @@ org.apache.royale.html.supportClasses.Viewport.prototype.get__contentView = func
 
 org.apache.royale.html.supportClasses.Viewport.prototype.set__strand = function(value) {
   this._strand = value;
-  this.contentArea = org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IContentView, "iContentView", this._strand);
+  this.contentArea = org.apache.royale.utils.Language.as(org.apache.royale.utils.loadBeadFromValuesManager(org.apache.royale.core.IContentView, "iContentView", this._strand), org.apache.royale.core.UIBase);
   if (!this.contentArea)
-    this.contentArea = value;
+    this.contentArea = org.apache.royale.utils.Language.as(value, org.apache.royale.core.UIBase);
   this.contentArea.element.style.overflow = "hidden";
 };
 

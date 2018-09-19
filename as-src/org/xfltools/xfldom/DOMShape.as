@@ -34,7 +34,6 @@ package org.xfltools.xfldom
 			
 			for each (var strokeStyleXML:XML in XMLAssistant.getChildList(xml, ["strokes", "StrokeStyle"]))
 			{
-				trace("Stroke found in XML");
 				strokeStyle = new StrokeStyle();
 				strokeStyle.fromXML(strokeStyleXML);
 				
@@ -114,11 +113,6 @@ package org.xfltools.xfldom
 			}
 			
 			_edgeDescriptors.sort(sortFillsFirst);
-			
-			/*for each (var edgeDesc:EdgeDescriptor in _edgeDescriptors)
-			{
-				trace("Edge Desc: Fill = " + edgeDesc.fillStyle + " and stroke = " + edgeDesc.strokeStyle + " and path = " + edgeDesc.start.x + ", " + edgeDesc.start.y + ", " + edgeDesc.end.x + ", " + edgeDesc.end.y);
-			}*/
 		}
 		
 		private function sortFillsFirst(edgeDescriptorA:Vector.<EdgeDescriptor>, edgeDescriptorB:Vector.<EdgeDescriptor>):int

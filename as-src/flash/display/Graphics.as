@@ -308,8 +308,7 @@ package flash.display
 			_javascriptImplementation.graphics.setStrokeStyle(thickness, capsAsNumber, joints, miterLimit, ignoreScale);
 			
 			var colorString:String = Graphics.colorStringFromUint(color) + alphaStringFromUint(alpha);
-			trace("Graphics stroke color string = " + colorString);
-
+			
 			_javascriptImplementation.graphics.beginStroke(Graphics.colorStringFromUint(color) + alphaStringFromUint(alpha));
 		}
 

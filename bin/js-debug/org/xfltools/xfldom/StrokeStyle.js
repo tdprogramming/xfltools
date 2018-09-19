@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.xfldom.StrokeStyle');
-/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.GraphicsStroke,flash.display.IGraphicsData,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.FillStyle,org.apache.royale.utils.Language*/
+/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.GraphicsStroke,flash.display.IGraphicsData,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.FillStyle*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
 goog.require('org.xfltools.xfldom.IGraphicsDrawable');

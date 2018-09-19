@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.utils.XMLAssistant');
-/* Royale Dependency List: XML,flash.geom.Point,org.apache.royale.utils.Language*/
+/* Royale Dependency List: XML,flash.geom.Point*/
 
 
 

@@ -57,22 +57,6 @@ org.apache.royale.events.Event.COMPLETE = "complete";
 
 /**
  * @export
- * @const
- * @type {string}
- */
-org.apache.royale.events.Event.SELECT = "select";
-
-
-/**
- * @export
- * @const
- * @type {string}
- */
-org.apache.royale.events.Event.OPEN = "open";
-
-
-/**
- * @export
  * @type {boolean}
  */
 org.apache.royale.events.Event.prototype.bubbles;

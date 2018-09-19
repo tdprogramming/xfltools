@@ -82,7 +82,7 @@ org.apache.royale.utils.StringUtil.substitute = function(str, rest) {
   var /** @type {number} */ len = rest.length;
   var /** @type {Array} */ args;
   if (len === 1 && org.apache.royale.utils.Language.is(rest[0], Array)) {
-    args = rest[0];
+    args = org.apache.royale.utils.Language.as(rest[0], Array);
     len = args.length;
   } else {
     args = rest;
@@ -319,33 +319,6 @@ org.apache.royale.utils.StringUtil.testCharacter = function(charCode, restrict) 
 
 
 /**
- *  Removes word from a String and return the new result string
- *
- *  @asparam str The String to be modified. 
- *  @asparam wordToSeach The word string to search and remove from str
- *
- *  @asreturn <code>String</code> the string without the word
- *  
- *  @langversion 3.0
- *  @playerversion Flash 10.2
- *  @playerversion AIR 2.6
- *  @productversion Royale 0.9.3
- * @export
- * @param {string} str
- * @param {string} wordToSeach
- * @return {string}
- */
-org.apache.royale.utils.StringUtil.removeWord = function(str, wordToSeach) {
-  var /** @type {number} */ pos;
-  while (str.search(wordToSeach) > -1) {
-    pos = str.search(wordToSeach);
-    str = str.substring(0, pos) + str.substring(pos + wordToSeach.length, str.length);
-  }
-  return str;
-};
-
-
-/**
  * Metadata
  *
  * @type {Object.<string, Array.<Object>>}
@@ -372,8 +345,7 @@ org.apache.royale.utils.StringUtil.prototype.ROYALE_REFLECTION_INFO = function (
         '|trim': { type: 'String', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false } ]; }},
         '|splitAndTrim': { type: 'Array', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false },{ index: 2, type: 'String', optional: false } ]; }},
         '|trimArrayElements': { type: 'String', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false },{ index: 2, type: 'String', optional: false } ]; }},
-        '|isWhitespace': { type: 'Boolean', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false } ]; }},
-        '|removeWord': { type: 'String', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false },{ index: 2, type: 'String', optional: false } ]; }}
+        '|isWhitespace': { type: 'Boolean', declaredBy: 'org.apache.royale.utils.StringUtil', parameters: function () { return [  { index: 1, type: 'String', optional: false } ]; }}
       };
     }
   };

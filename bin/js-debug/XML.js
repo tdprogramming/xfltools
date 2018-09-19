@@ -175,13 +175,7 @@ XML.escapeAttributeValue = function(value) {
         outArr[i] = "&lt;";
         break;
       case "&":
-        if (arr[i + 1] == "#")
-          outArr[i] = "&";
-        else
-          outArr[i] = "&amp;";
-        break;
-      case '"':
-        outArr[i] = "&quot;";
+        outArr[i] = "&amp;";
         break;
       case "\n":
         outArr[i] = "&#xA;";
@@ -219,10 +213,7 @@ XML.escapeElementValue = function(value) {
         outArr[i] = "&gt;";
         break;
       case "&":
-        if (arr[i + 1] == "#")
-          outArr[i] = "&";
-        else
-          outArr[i] = "&amp;";
+        outArr[i] = "&amp;";
         break;
       default:
         outArr[i] = arr[i];
@@ -407,44 +398,6 @@ XML.settings = function() {
 
 
 /**
- *  mimics the top-level XML function
- *  @royaleignorecoercion XMLList
- * @export
- * @param {*} xml
- * @return {XML}
- */
-XML.conversion = function(xml) {
-  if (xml == null) {
-    return null;
-  } else if (xml.ROYALE_CLASS_INFO != null) {
-    var /** @type {string} */ className = org.apache.royale.utils.Language.string(xml.ROYALE_CLASS_INFO.names[0].name);
-    if (className == "XML")
-      return xml; else if (className == "XMLList") {
-      var /** @type {XMLList} */ xmlList = xml;
-      if (xmlList.length() == 1)
-        return xmlList[0];
-      return null;
-    }
-  }
-  return new XML(xml);
-};
-
-
-/**
- * @private
- * @type {RegExp}
- */
-XML.xmlRegEx = /&(?![\w]+;)/g;
-
-
-/**
- * @private
- * @type {DOMParser}
- */
-XML.parser;
-
-
-/**
  * @private
  * @type {string}
  */
@@ -456,18 +409,17 @@ XML.errorNS;
  * @param {string} xml
  */
 XML.prototype.parseXMLStr = function(xml) {
-  xml = xml.replace(XML.xmlRegEx, "&amp;");
-  if (!XML.parser)
-    XML.parser = new DOMParser();
+  xml = xml.replace(/&(?![\w]+;)/g, "&amp;");
+  var /** @type {DOMParser} */ parser = new DOMParser();
   if (XML.errorNS == null) {
     try {
-      XML.errorNS = XML.parser.parseFromString('<', 'application/xml').getElementsByTagName("parsererror")[0].namespaceURI;
+      XML.errorNS = parser.parseFromString('<', 'application/xml').getElementsByTagName("parsererror")[0].namespaceURI;
     } catch (err) {
       XML.errorNS = "na";
     }
   }
   try {
-    var /** @type {Document} */ doc = XML.parser.parseFromString(xml, "application/xml");
+    var /** @type {Document} */ doc = parser.parseFromString(xml, "application/xml");
   } catch (err) {
     throw err;
   }
@@ -1378,7 +1330,7 @@ XML.prototype.length = function() {
  * @asreturn 
  * 
  * @export
- * @return {string}
+ * @return {Object}
  */
 XML.prototype.localName = function() {
   return this.name().localName;
@@ -1398,7 +1350,7 @@ XML.prototype._name;
  * @asreturn 
  * 
  * @export
- * @return {QName}
+ * @return {Object}
  */
 XML.prototype.name = function() {
   if (!this._name)
@@ -2636,7 +2588,6 @@ XML.prototype.ROYALE_REFLECTION_INFO = function () {
         '|defaultSettings': { type: 'Object', declaredBy: 'XML'},
         '|setSettings': { type: 'void', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'Object', optional: false } ]; }},
         '|settings': { type: 'Object', declaredBy: 'XML'},
-        '|conversion': { type: 'XML', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: '*', optional: false } ]; }},
         'XML': { type: '', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: '*', optional: true } ]; }},
         'addChild': { type: 'void', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'XML', optional: false } ]; }},
         'addNamespace': { type: 'XML', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'Namespace', optional: false } ]; }},
@@ -2667,8 +2618,8 @@ XML.prototype.ROYALE_REFLECTION_INFO = function () {
         'insertChildAfter': { type: 'XML', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'XML', optional: false },{ index: 2, type: 'XML', optional: false } ]; }},
         'insertChildBefore': { type: 'XML', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'XML', optional: false },{ index: 2, type: 'XML', optional: false } ]; }},
         'length': { type: 'int', declaredBy: 'XML'},
-        'localName': { type: 'String', declaredBy: 'XML'},
-        'name': { type: 'QName', declaredBy: 'XML'},
+        'localName': { type: 'Object', declaredBy: 'XML'},
+        'name': { type: 'Object', declaredBy: 'XML'},
         'namespace': { type: '*', declaredBy: 'XML', parameters: function () { return [  { index: 1, type: 'String', optional: true } ]; }},
         'namespaceDeclarations': { type: 'Array', declaredBy: 'XML'},
         'nodeKind': { type: 'String', declaredBy: 'XML'},

@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.xfldom.Edge');
-/* Royale Dependency List: XML,org.xfltools.xfldom.EdgeDescriptor,org.apache.royale.utils.Language*/
+/* Royale Dependency List: XML,org.xfltools.xfldom.EdgeDescriptor*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
 

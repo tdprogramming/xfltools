@@ -11,8 +11,6 @@ package flash.display
 
 		public function DisplayObjectContainer()
 		{
-			trace("Construct DO Container");
-				
 			_children = new <flash.display.DisplayObject>[];
 			_javascriptImplementation = window["flashjs_display_DisplayObjectContainer_construct"]();
 			startFrameTicker();

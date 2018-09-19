@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.xfldom.DOMLayer');
-/* Royale Dependency List: XML,flash.display.DisplayObject,flash.display.MovieClip,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.DOMFrame,org.apache.royale.utils.Language*/
+/* Royale Dependency List: XML,flash.display.DisplayObject,flash.display.MovieClip,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.DOMFrame*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
 goog.require('org.xfltools.xfldom.IDOMFrameElement');

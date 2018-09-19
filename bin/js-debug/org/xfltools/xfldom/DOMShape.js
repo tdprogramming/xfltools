@@ -67,7 +67,6 @@ org.xfltools.xfldom.DOMShape.prototype.fromXML = function(xml) {
   {
   var strokeStyleXML = foreachiter0_target[foreachiter0];
   {
-    org.apache.royale.utils.Language.trace("Stroke found in XML");
     strokeStyle = new org.xfltools.xfldom.StrokeStyle();
     strokeStyle.fromXML(strokeStyleXML);
     this._strokes.push(strokeStyle);

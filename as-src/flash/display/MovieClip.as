@@ -1,28 +1,32 @@
 package flash.display
 {
-	import com.greensock.TimelineLite;
 	import flash.utils.Dictionary;
 
 	public class MovieClip extends Sprite
 	{
 		private var _currentFrame:int;
-		private var _timeline:TimelineLite;
+		private var _timeline:Object;
+		private var _tweensByDisplayObject:Dictionary;
 		
 		public function MovieClip()
 		{
 			super();
 
-			_timeline = new TimelineLite({onComplete:restartTimeline, onCompleteScope:this});
-		}
-
-		private function restartTimeline():void
-		{
-			_timeline.restart();
+			_timeline = window["flashjs_display_MovieClip_getTimeline"]();
+			_tweensByDisplayObject = new Dictionary();
 		}
 
 		public function tweenChild(child:DisplayObject, props:Object, duration:Number):void
 		{
-			_timeline.to(child, duration, props);
+			if (_tweensByDisplayObject[child] == null)
+			{
+				_tweensByDisplayObject[child] = window["flashjs_display_MovieClip_getTween"](child);
+				_timeline.addTween(_tweensByDisplayObject[child]);
+			}
+		
+			_tweensByDisplayObject[child].to(props, duration * 1000);
+			
+			_timeline.updateDuration();
 		}
 
 		public function get currentFrame():int

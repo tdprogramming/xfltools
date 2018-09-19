@@ -44,9 +44,7 @@ goog.exportSymbol('org.apache.royale.utils.MXMLDataInterpreter', org.apache.roya
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.9
- *  @royaleignorecoercion Array
- *  @royaleignorecoercion String
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} document
  * @param {Array} data
@@ -70,15 +68,15 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject = function(docume
       simple = data[i++];
       value = data[i++];
       if (simple == null)
-        value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, value);
+        value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, org.apache.royale.utils.Language.as(value, Array));
       else if (simple == false)
-        value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, value);
+        value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, org.apache.royale.utils.Language.as(value, Array));
       if (name == "id")
-        id = value;
+        id = org.apache.royale.utils.Language.as(value, String);
       if (name == "document" && !comp.document)
         comp.document = document;
       else if (name == "_id")
-        id = value; else if (name == "id") {
+        id = org.apache.royale.utils.Language.as(value, String); else if (name == "id") {
         try {
           comp["id"] = value;
         } catch (e) {
@@ -130,16 +128,11 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray = function(documen
 
 
 /**
- * @royaleignorecoercion Array
- * @royaleignorecoercion Function
- * @royaleignorecoercion String
- * @royaleignorecoercion org.apache.royale.core.IChild
- * @royaleignorecoercion org.apache.royale.core.IParent
- * @royaleignorecoercion org.apache.royale.core.IStrand
- * @royaleignorecoercion org.apache.royale.core.IBead
+ * @royaleignorecoercion Function 
+ * @royaleignorecoercion org.apache.royale.core.IChild 
  * @private
  * @param {Object} document
- * @param {Object} parent
+ * @param {org.apache.royale.core.IParent} parent
  * @param {Object} comp
  * @param {Array} data
  * @param {number} i
@@ -159,12 +152,12 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, parent, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, parent, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, org.apache.royale.utils.Language.as(value, Array));
     comp[name] = value;
     if (org.apache.royale.utils.Language.is(value, org.apache.royale.core.IBead) && org.apache.royale.utils.Language.is(comp, org.apache.royale.core.IStrand))
-      comp.addBead(value);
+      org.apache.royale.utils.Language.as(comp, org.apache.royale.core.IStrand, true).addBead(org.apache.royale.utils.Language.as(value, org.apache.royale.core.IBead));
   }
   var /** @type {number} */ beadOffset = i + (m - 1) * 3;
   if (m > 0 && data[beadOffset] == "beads") {
@@ -177,15 +170,15 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, org.apache.royale.utils.Language.as(value, Array));
     if (name == "id")
-      id = value;
+      id = org.apache.royale.utils.Language.as(value, String);
     if (name == "document" && !comp.document)
       comp.document = document;
     else if (name == "_id")
-      id = value; else if (name == "id") {
+      id = org.apache.royale.utils.Language.as(value, String); else if (name == "id") {
       try {
         comp["id"] = value;
       } catch (e) {
@@ -199,9 +192,9 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, org.apache.royale.utils.Language.as(value, Array));
     comp[name] = value;
   }
   m = Number(data[i++]);
@@ -210,9 +203,9 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(document, org.apache.royale.utils.Language.as(value, Array));
     comp.setStyle(name, value);
   }
   
@@ -223,10 +216,6 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     
     comp.addEventListener(name, goog.bind( /** @type {Function} */ (value), document));
   }
-  if (id)
-    document[id] = comp;
-  if (org.apache.royale.utils.Language.is(comp, org.apache.royale.core.IDocument))
-    comp.setDocument(document, id);
   var /** @type {Array} */ children = data[i++];
   if (children && org.apache.royale.utils.Language.is(comp, org.apache.royale.core.IMXMLDocument)) {
     comp.setMXMLDescriptor(document, children);
@@ -236,9 +225,13 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
     parent.addElement(comp, !org.apache.royale.utils.Language.is(parent, org.apache.royale.core.IContainer));
   if (children) {
     if (!org.apache.royale.utils.Language.is(comp, org.apache.royale.core.IMXMLDocument)) {
-      org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances(document, comp, children);
+      org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances(document, org.apache.royale.utils.Language.as(comp, org.apache.royale.core.IParent), children);
     }
   }
+  if (id)
+    document[id] = comp;
+  if (org.apache.royale.utils.Language.is(comp, org.apache.royale.core.IDocument))
+    comp.setDocument(document, id);
   return i;
 };
 
@@ -254,8 +247,7 @@ org.apache.royale.utils.MXMLDataInterpreter.initializeStrandBasedObject = functi
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.9
- *  @royaleignorecoercion org.apache.royale.core.IContainer
+ *  @productversion Royale 0.0
  * @export
  * @param {Object} document
  * @param {org.apache.royale.core.IParent} parent
@@ -266,7 +258,7 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances = function(doc
     org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(document, parent, data);
   }
   if (org.apache.royale.utils.Language.is(parent, org.apache.royale.core.IContainer)) {
-    parent.childrenAdded();
+    org.apache.royale.utils.Language.as(parent, org.apache.royale.core.IContainer, true).childrenAdded();
   }
 };
 
@@ -283,10 +275,8 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLInstances = function(doc
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.9
- *  @royaleignorecoercion Array
+ *  @productversion Royale 0.0
  *  @royaleignorecoercion Function
- *  @royaleignorecoercion String
  * @export
  * @param {Object} host
  * @param {Array} data
@@ -313,13 +303,13 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLProperties = function(ho
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, org.apache.royale.utils.Language.as(value, Array));
     if (name == "id")
-      id = value;
+      id = org.apache.royale.utils.Language.as(value, String);
     if (name == "_id")
-      id = value;
+      id = org.apache.royale.utils.Language.as(value, String);
     else
       host[name] = value;
   }
@@ -328,9 +318,9 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLProperties = function(ho
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, org.apache.royale.utils.Language.as(value, Array));
     host[name] = value;
   }
   m = Number(data[i++]);
@@ -339,9 +329,9 @@ org.apache.royale.utils.MXMLDataInterpreter.generateMXMLProperties = function(ho
     simple = data[i++];
     value = data[i++];
     if (simple == null)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLArray(host, null, org.apache.royale.utils.Language.as(value, Array));
     else if (simple == false)
-      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, value);
+      value = org.apache.royale.utils.MXMLDataInterpreter.generateMXMLObject(host, org.apache.royale.utils.Language.as(value, Array));
     host[name] = value;
   }
   

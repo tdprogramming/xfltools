@@ -59,12 +59,11 @@ org.apache.royale.html.beads.GroupView.prototype.layoutRunning;
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
  *  @productversion Royale 0.8
- *  @royaleignorecoercion org.apache.royale.core.ILayoutChild
  * @protected
  * @param {org.apache.royale.events.Event} event
  */
 org.apache.royale.html.beads.GroupView.prototype.handleInitComplete = function(event) {
-  var /** @type {Object} */ ilc = this.host;
+  var /** @type {org.apache.royale.core.ILayoutChild} */ ilc = org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutChild);
   if ((ilc.isHeightSizedToContent() || !isNaN(ilc.explicitHeight) || !isNaN(ilc.percentHeight)) && (ilc.isWidthSizedToContent() || !isNaN(ilc.explicitWidth) || !isNaN(ilc.percentWidth))) {
     this.completeSetup();
   } else {
@@ -162,7 +161,7 @@ org.apache.royale.html.beads.GroupView.prototype.afterLayout = function() {
 
 
 org.apache.royale.html.beads.GroupView.prototype.get__contentView = function() {
-  return this.host;
+  return org.apache.royale.utils.Language.as(this.host, org.apache.royale.core.ILayoutView);
 };
 
 

@@ -81,7 +81,6 @@ org.xfltools.display.XFLLoader.prototype.load = function(url) {
  * @param {flash.events.Event} event
  */
 org.xfltools.display.XFLLoader.prototype.onLoadComplete = function(event) {
-  org.apache.royale.utils.Language.trace("Load complete!");
   this._urlLoader.removeEventListener(flash.events.Event.COMPLETE, org.apache.royale.utils.Language.closure(this.onLoadComplete, this, 'onLoadComplete'));
   this._xml = new XML(this._urlLoader.data);
   org.xfltools.xfldom.DOMComponentFactory.populateSymbols(this._rootFolderURL, this._xml, org.apache.royale.utils.Language.closure(this.onLibraryLoadComplete, this, 'onLibraryLoadComplete'));

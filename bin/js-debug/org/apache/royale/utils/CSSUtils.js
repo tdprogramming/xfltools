@@ -14,9 +14,11 @@ goog.provide('org.apache.royale.utils.CSSUtils');
 
 
 /**
+ * @asprivate
  * @constructor
  */
 org.apache.royale.utils.CSSUtils = function() {
+  throw new Error("CSSUtils should not be instantiated.");
 };
 
 
@@ -27,7 +29,6 @@ goog.exportSymbol('org.apache.royale.utils.CSSUtils', org.apache.royale.utils.CS
 
 
 /**
- * @asprivate
  * @export
  * @param {number} value
  * @return {string}
@@ -263,9 +264,7 @@ org.apache.royale.utils.CSSUtils.getLeftValue = function(value, values, referenc
  *  @langversion 3.0
  *  @playerversion Flash 10.2
  *  @playerversion AIR 2.6
- *  @productversion Royale 0.9
- *  @royaleignorecoercion Array
- *  @royaleignorecoercion Number
+ *  @productversion Royale 0.0
  *  @royaleignorecoercion String
  * @export
  * @param {Object} value
@@ -277,18 +276,18 @@ org.apache.royale.utils.CSSUtils.getLeftValue = function(value, values, referenc
 org.apache.royale.utils.CSSUtils.getSideValue = function(value, values, side, reference) {
   reference = typeof reference !== 'undefined' ? reference : NaN;
   if (org.apache.royale.utils.Language.is(value, Number))
-    return value;
+    return org.apache.royale.utils.Language.as(value, Number);
   if (org.apache.royale.utils.Language.is(values, Number))
-    return values;
+    return org.apache.royale.utils.Language.as(values, Number);
   if (value != null)
     return org.apache.royale.utils.CSSUtils.toNumber(value, reference);
   if (values == null)
     return 0;
   if (org.apache.royale.utils.Language.is(values, Array)) {
-    value = org.apache.royale.utils.CSSUtils.getArrayValue(values, side);
+    value = org.apache.royale.utils.CSSUtils.getArrayValue(org.apache.royale.utils.Language.as(values, Array), side);
     if (org.apache.royale.utils.Language.is(value, String))
       return org.apache.royale.utils.CSSUtils.toNumber(value, reference);
-    return value;
+    return org.apache.royale.utils.Language.as(value, Number);
   }
   return org.apache.royale.utils.CSSUtils.toNumber(values, reference);
 };
@@ -352,6 +351,7 @@ org.apache.royale.utils.CSSUtils.prototype.ROYALE_REFLECTION_INFO = function () 
     accessors: function () {return {};},
     methods: function () {
       return {
+        'CSSUtils': { type: '', declaredBy: 'org.apache.royale.utils.CSSUtils'},
         '|attributeFromColor': { type: 'String', declaredBy: 'org.apache.royale.utils.CSSUtils', parameters: function () { return [  { index: 1, type: 'uint', optional: false } ]; }},
         '|toNumber': { type: 'Number', declaredBy: 'org.apache.royale.utils.CSSUtils', parameters: function () { return [  { index: 1, type: 'String', optional: false },{ index: 2, type: 'Number', optional: true } ]; }},
         '|toColor': { type: 'uint', declaredBy: 'org.apache.royale.utils.CSSUtils', parameters: function () { return [  { index: 1, type: 'Object', optional: false } ]; }},
