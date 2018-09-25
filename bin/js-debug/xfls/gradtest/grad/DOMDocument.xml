@@ -1,0 +1,45 @@
+<DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" currentTimeline="1" xflVersion="2.9" creatorInfo="Adobe Animate CC" platform="Windows" versionInfo="Saved by Animate Windows 16.2 build 24" majorVersion="16" minorVersion="2" buildNumber="24" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" filetypeGUID="DD0DDBBF-5BEF-45B2-9F24-A3048D2A676F" fileGUID="2A5AFE9B59450B4584C0284E859B1B9C">
+     <timelines>
+          <DOMTimeline name="Scene 1">
+               <layers>
+                    <DOMLayer name="Layer 1" color="#4F80FF" current="true" isSelected="true">
+                         <frames>
+                              <DOMFrame index="0" keyMode="9728">
+                                   <elements>
+                                        <DOMShape>
+                                             <fills>
+                                                  <FillStyle index="1">
+                                                       <LinearGradient>
+                                                            <matrix>
+                                                                 <Matrix a="0.1947021484375" d="0.084808349609375" tx="325.5" ty="204.5"/>
+                                                            </matrix>
+                                                            <GradientEntry color="#0066FF" ratio="0"/>
+                                                            <GradientEntry ratio="1"/>
+                                                       </LinearGradient>
+                                                  </FillStyle>
+                                                  <FillStyle index="2">
+                                                       <RadialGradient>
+                                                            <matrix>
+                                                                 <Matrix a="0.09112548828125" d="0.09112548828125" tx="104.5" ty="338.5"/>
+                                                            </matrix>
+                                                            <GradientEntry color="#FFFFFF" ratio="0"/>
+                                                            <GradientEntry ratio="1"/>
+                                                       </RadialGradient>
+                                                  </FillStyle>
+                                             </fills>
+                                             <edges>
+                                                  <Edge fillStyle1="1" edges="!3320 2701|9700 2701!9700 2701|9700 5480!9700 5480|3320 5480!3320 5480|3320 2701"/>
+                                                  <Edge fillStyle1="2" edges="!3580 6770[3580 7122 3143 7371!3143 7371[2707 7620 2090 7620!2090 7620[1473 7620 1036 7371!1036 7371[600 7122 600 6770!600 6770[600 6418 1036 6169!1036 6169[1473 5920 2090 5920!2090 5920[2707 5920 3143 6169!3143 6169[3580 6418 3580 6770"/>
+                                             </edges>
+                                        </DOMShape>
+                                   </elements>
+                              </DOMFrame>
+                         </frames>
+                    </DOMLayer>
+               </layers>
+          </DOMTimeline>
+     </timelines>
+     <scripts/>
+     <PrinterSettings/>
+     <publishHistory/>
+</DOMDocument>

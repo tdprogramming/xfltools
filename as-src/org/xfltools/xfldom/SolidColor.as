@@ -1,10 +1,15 @@
 package org.xfltools.xfldom 
 {
+	import flash.display.IGraphicsData;
+	import flash.display.GraphicsSolidFill;
+	
+	import org.xfltools.utils.XMLAssistant;
+
 	/**
 	 * ...
 	 * @author Tim Diggle
 	 */
-	public class SolidColor implements IDOMComponent
+	public class SolidColor implements IDOMComponent,IGraphicsDrawable
 	{
 		private var _color:uint = 0;
 		private var _alpha:Number = 1;
@@ -20,14 +25,9 @@ package org.xfltools.xfldom
 			_alpha = xml.hasOwnProperty("@alpha") ? parseFloat(xml.@alpha) : 1;
 		}
 		
-		public function get color():uint
+		public function toGraphicsData():Vector.<IGraphicsData>
 		{
-			return _color;
-		}
-		
-		public function get alpha():Number
-		{
-			return _alpha;
+			return Vector.<IGraphicsData>([new GraphicsSolidFill(_color, _alpha)]);
 		}
 	}
 

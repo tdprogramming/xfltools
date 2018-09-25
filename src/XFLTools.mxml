@@ -23,7 +23,7 @@
             
 				var loader:Loader = new Loader();
 			
-				loader.load(new URLRequest("xfls/chessdemo2.xfl"));
+				loader.load(new URLRequest("xfls/chessdemo.xfl"));
 			
 				sprite.addChild(loader);
 			}

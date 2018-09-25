@@ -1,4 +1,4 @@
-<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Symbol 2" itemID="5ba02098-00000006" lastModified="1537220761">
+<DOMSymbolItem xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" name="Symbol 2" itemID="5ba02098-00000006" lastModified="1537898707">
   <timeline>
     <DOMTimeline name="Symbol 2">
       <layers>
@@ -9,11 +9,20 @@
                 <DOMShape>
                   <fills>
                     <FillStyle index="1">
-                      <SolidColor/>
+                      <LinearGradient>
+                        <matrix>
+                          <Matrix a="0.0244140625" d="0.0244140625" tx="20" ty="20"/>
+                        </matrix>
+                        <GradientEntry color="#333333" ratio="0"/>
+                        <GradientEntry color="#333333" ratio="0"/>
+                        <GradientEntry color="#333333" ratio="0"/>
+                        <GradientEntry color="#999999" ratio="0.431372549019608"/>
+                        <GradientEntry ratio="1"/>
+                      </LinearGradient>
                     </FillStyle>
                   </fills>
                   <edges>
-                    <Edge fillStyle1="1" edges="!800 800S2|0 800!0 800|0 0!0 0|800 0!800 0|800 800"/>
+                    <Edge fillStyle1="1" edges="!800 800|0 800!0 800|0 0!0 0|800 0!800 0|800 800"/>
                   </edges>
                 </DOMShape>
               </elements>

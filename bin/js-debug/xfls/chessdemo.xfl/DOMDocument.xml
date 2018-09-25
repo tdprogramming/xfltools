@@ -1,7 +1,7 @@
 <DOMDocument xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://ns.adobe.com/xfl/2008/" width="400" height="600" currentTimeline="1" xflVersion="2.9" creatorInfo="Adobe Animate CC" platform="Windows" versionInfo="Saved by Animate Windows 16.2 build 24" majorVersion="16" minorVersion="2" buildNumber="24" viewAngle3D="41.4727521243985" nextSceneIdentifier="2" playOptionsPlayLoop="false" playOptionsPlayPages="false" playOptionsPlayFrameActions="false" filetypeGUID="DD0DDBBF-5BEF-45B2-9F24-A3048D2A676F" fileGUID="89B37D6DADCDFE4CA1DB7750287A6E7A">
      <symbols>
-          <Include href="Symbol 1.xml" loadImmediate="false" itemID="5ba018cd-00000004" lastModified="1537221024"/>
-          <Include href="Symbol 2.xml" loadImmediate="false" itemID="5ba02098-00000006" lastModified="1537220761"/>
+          <Include href="Symbol 1.xml" loadImmediate="false" itemID="5ba018cd-00000004" lastModified="1537901020"/>
+          <Include href="Symbol 2.xml" loadImmediate="false" itemID="5ba02098-00000006" lastModified="1537898707"/>
      </symbols>
      <timelines>
           <DOMTimeline name="Scene 1">
@@ -9,7 +9,7 @@
                     <DOMLayer name="Layer 5" color="#009999" current="true" isSelected="true" animationType="motion object">
                          <frames>
                               <DOMFrame index="0" duration="96" tweenType="motion object" motionTweenRotate="none" motionTweenScale="false" isMotionObject="true" visibleAnimationKeyframes="2097151" keyMode="8195">
-                                   <motionObjectXML><AnimationCore TimeScale="24000" Version="1" duration="96000"><TimeMap strength="0" type="Quadratic"/><metadata><names><name langID="en_US" value=""/></names><Settings orientToPath="0" xformPtXOffsetPct="0.50625" xformPtYOffsetPct="0.5" xformPtZOffsetPixels="0"/></metadata><PropertyContainer id="headContainer"><PropertyContainer id="Basic_Motion"><Property enabled="1" id="Motion_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,279.95" next="0,279.95" previous="0,279.95" roving="0" timevalue="23000"/><Keyframe anchor="0,279.95" next="0,279.95" previous="0,279.95" roving="0" timevalue="47000"/><Keyframe anchor="0,-0.05" next="0,-0.05" previous="0,-0.05" roving="0" timevalue="71000"/><Keyframe anchor="0,-0.05" next="0,-0.05" previous="0,-0.05" roving="0" timevalue="95000"/></Property><Property enabled="1" id="Motion_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="23000"/><Keyframe anchor="0,280" next="0,280" previous="0,280" roving="0" timevalue="47000"/><Keyframe anchor="0,280" next="0,280" previous="0,280" roving="0" timevalue="71000"/><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="95000"/></Property><Property enabled="1" id="Rotation_Z" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Transformation"><Property enabled="1" id="Skew_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Skew_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Colors"/><PropertyContainer id="Filters"/></PropertyContainer></AnimationCore></motionObjectXML>
+                                   <motionObjectXML><AnimationCore TimeScale="24000" Version="1" duration="96000"><TimeMap strength="0" type="Quadratic"/><metadata><names><name langID="en_US" value=""/></names><Settings orientToPath="0" xformPtXOffsetPct="0.505" xformPtYOffsetPct="0.5" xformPtZOffsetPixels="0"/></metadata><PropertyContainer id="headContainer"><PropertyContainer id="Basic_Motion"><Property enabled="1" id="Motion_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,279.95" next="0,279.95" previous="0,279.95" roving="0" timevalue="23000"/><Keyframe anchor="0,279.95" next="0,279.95" previous="0,279.95" roving="0" timevalue="47000"/><Keyframe anchor="0,-0.05" next="0,-0.05" previous="0,-0.05" roving="0" timevalue="71000"/><Keyframe anchor="0,-0.05" next="0,-0.05" previous="0,-0.05" roving="0" timevalue="95000"/></Property><Property enabled="1" id="Motion_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="23000"/><Keyframe anchor="0,280" next="0,280" previous="0,280" roving="0" timevalue="47000"/><Keyframe anchor="0,280" next="0,280" previous="0,280" roving="0" timevalue="71000"/><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="95000"/></Property><Property enabled="1" id="Rotation_Z" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Transformation"><Property enabled="1" id="Skew_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Skew_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,0" next="0,0" previous="0,0" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_X" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property><Property enabled="1" id="Scale_Y" ignoreTimeMap="0" readonly="0" visible="1"><Keyframe anchor="0,100" next="0,100" previous="0,100" roving="0" timevalue="0"/></Property></PropertyContainer><PropertyContainer id="Colors"/><PropertyContainer id="Filters"/></PropertyContainer></AnimationCore></motionObjectXML>
                                    <elements>
                                         <DOMSymbolInstance libraryItemName="Symbol 1" selected="true">
                                              <matrix>
@@ -340,16 +340,18 @@
                                                   <Edge fillStyle0="2" fillStyle1="3" edges="!414 11600|807 11207!807 11207[#329.F7 #2BC4.1B 810 11200"/>
                                                   <Edge fillStyle0="2" edges="!810 11200|810 4800!810 4800[#329.F7 #12BB.E5 807 4793!807 4793[#324.1B #12B6.09 800 4790!800 4790[#31B.E5 #12B6.09 793 4793!793 4793|393 5193!393 5193[#186.09 #144B.E5 390 5200!390 5200|390 11600!390 11600[#186.09 #2D54.1B 393 11607
 !393 11607[#18B.E5 #2D59.F7 400 11610"/>
+                                                  <Edge fillStyle0="2" fillStyle1="4" edges="
+!400 11610|400 11600"/>
+                                                  <Edge fillStyle0="2" fillStyle1="2" strokeStyle="1" edges="
+!390 11600|400 11600"/>
+                                                  <Edge fillStyle0="2" fillStyle1="4" strokeStyle="1" edges="
+!400 11600|414 11600"/>
                                                   <Edge fillStyle0="1" fillStyle1="1" strokeStyle="1" edges="
 !7200 11200|7190 11200"/>
                                                   <Edge fillStyle0="3" strokeStyle="1" edges="
 !7190 11200|810 11200"/>
                                                   <Edge fillStyle0="2" fillStyle1="2" strokeStyle="1" edges="
-!810 11200|800 11200!800 11200|414 11600!390 11600|400 11600"/>
-                                                  <Edge fillStyle0="2" fillStyle1="4" strokeStyle="1" edges="
-!400 11600|414 11600"/>
-                                                  <Edge fillStyle0="2" fillStyle1="4" edges="
-!400 11610|400 11600"/>
+!810 11200|800 11200!800 11200|414 11600"/>
                                                   <Edge fillStyle0="1" fillStyle1="4" strokeStyle="1" edges="
 !7586 11600|7610 11600"/>
                                                   <Edge fillStyle0="1" fillStyle1="3" strokeStyle="1" edges="

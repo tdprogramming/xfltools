@@ -8,15 +8,17 @@
  */
 
 goog.provide('org.xfltools.xfldom.SolidColor');
-/* Royale Dependency List: XML*/
+/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.IGraphicsData*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
+goog.require('org.xfltools.xfldom.IGraphicsDrawable');
 
 
 
 /**
  * @constructor
  * @implements {org.xfltools.xfldom.IDOMComponent}
+ * @implements {org.xfltools.xfldom.IGraphicsDrawable}
  */
 org.xfltools.xfldom.SolidColor = function() {
 };
@@ -52,28 +54,13 @@ org.xfltools.xfldom.SolidColor.prototype.fromXML = function(xml) {
 };
 
 
-org.xfltools.xfldom.SolidColor.prototype.get__color = function() {
-  return this._color;
-};
-
-
-org.xfltools.xfldom.SolidColor.prototype.get__alpha = function() {
-  return this._alpha;
-};
-
-
-Object.defineProperties(org.xfltools.xfldom.SolidColor.prototype, /** @lends {org.xfltools.xfldom.SolidColor.prototype} */ {
 /**
-  * @export
-  * @type {number} */
-color: {
-get: org.xfltools.xfldom.SolidColor.prototype.get__color},
-/**
-  * @export
-  * @type {number} */
-alpha: {
-get: org.xfltools.xfldom.SolidColor.prototype.get__alpha}}
-);
+ * @export
+ * @return {Array}
+ */
+org.xfltools.xfldom.SolidColor.prototype.toGraphicsData = function() {
+  return [new flash.display.GraphicsSolidFill(this._color, this._alpha)].slice();
+};
 
 
 /**
@@ -81,7 +68,7 @@ get: org.xfltools.xfldom.SolidColor.prototype.get__alpha}}
  *
  * @type {Object.<string, Array.<Object>>}
  */
-org.xfltools.xfldom.SolidColor.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'SolidColor', qName: 'org.xfltools.xfldom.SolidColor', kind: 'class' }], interfaces: [org.xfltools.xfldom.IDOMComponent] };
+org.xfltools.xfldom.SolidColor.prototype.ROYALE_CLASS_INFO = { names: [{ name: 'SolidColor', qName: 'org.xfltools.xfldom.SolidColor', kind: 'class' }], interfaces: [org.xfltools.xfldom.IDOMComponent, org.xfltools.xfldom.IGraphicsDrawable] };
 
 
 
@@ -93,16 +80,12 @@ org.xfltools.xfldom.SolidColor.prototype.ROYALE_CLASS_INFO = { names: [{ name: '
 org.xfltools.xfldom.SolidColor.prototype.ROYALE_REFLECTION_INFO = function () {
   return {
     variables: function () {return {};},
-    accessors: function () {
-      return {
-        'color': { type: 'uint', access: 'readonly', declaredBy: 'org.xfltools.xfldom.SolidColor'},
-        'alpha': { type: 'Number', access: 'readonly', declaredBy: 'org.xfltools.xfldom.SolidColor'}
-      };
-    },
+    accessors: function () {return {};},
     methods: function () {
       return {
         'SolidColor': { type: '', declaredBy: 'org.xfltools.xfldom.SolidColor'},
-        'fromXML': { type: 'void', declaredBy: 'org.xfltools.xfldom.SolidColor', parameters: function () { return [  { index: 1, type: 'XML', optional: false } ]; }}
+        'fromXML': { type: 'void', declaredBy: 'org.xfltools.xfldom.SolidColor', parameters: function () { return [  { index: 1, type: 'XML', optional: false } ]; }},
+        'toGraphicsData': { type: 'Vector.<flash.display.IGraphicsData>', declaredBy: 'org.xfltools.xfldom.SolidColor'}
       };
     }
   };

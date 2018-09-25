@@ -77,11 +77,11 @@ package flash.display
 			{
 				case GradientType.LINEAR:
 					matrix.cacheCjsLinearGradientValues();
-					_javascriptImplementation.beginLinearGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1); 
+					_javascriptImplementation.graphics.beginLinearGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1); 
 					break;
 				case GradientType.RADIAL:
 					matrix.cacheCjsRadialGradientValues();
-					_javascriptImplementation.beginRadialGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillRadius0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1, matrix.cjsGradientFillRadius1);
+					_javascriptImplementation.graphics.beginRadialGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillRadius0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1, matrix.cjsGradientFillRadius1);
 					break;
 				default:
 					break;

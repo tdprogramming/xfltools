@@ -31,5 +31,9 @@ package org.xfltools.xfldom
 		public static const MATRIX:String = "Matrix";
 		public static const TRANSFORMATION_POINT:String = "transformationPoint";
 		public static const POINT:String = "Point";
+		public static const SOLID_COLOR:String = "SolidColor";
+		public static const LINEAR_GRADIENT:String = "LinearGradient";
+		public static const RADIAL_GRADIENT:String = "RadialGradient";
+		public static const GRADIENT_ENTRY:String = "GradientEntry";
 	}
 }

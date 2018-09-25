@@ -20,15 +20,15 @@
     <pngDefaultName>1</pngDefaultName>
     <swcDefaultName>1</swcDefaultName>
     <oamDefaultName>1</oamDefaultName>
-    <flashFileName>chessdemo2.swf</flashFileName>
-    <projectorWinFileName>chessdemo2.exe</projectorWinFileName>
-    <projectorMacFileName>chessdemo2.app</projectorMacFileName>
-    <htmlFileName>chessdemo2.html</htmlFileName>
-    <gifFileName>chessdemo2.gif</gifFileName>
-    <jpegFileName>chessdemo2.jpg</jpegFileName>
-    <pngFileName>chessdemo2.png</pngFileName>
-    <swcFileName>chessdemo2.swc</swcFileName>
-    <oamFileName>chessdemo2.oam</oamFileName>
+    <flashFileName>grad.swf</flashFileName>
+    <projectorWinFileName>grad.exe</projectorWinFileName>
+    <projectorMacFileName>grad.app</projectorMacFileName>
+    <htmlFileName>grad.html</htmlFileName>
+    <gifFileName>grad.gif</gifFileName>
+    <jpegFileName>grad.jpg</jpegFileName>
+    <pngFileName>grad.png</pngFileName>
+    <swcFileName>grad.swc</swcFileName>
+    <oamFileName>grad.oam</oamFileName>
     <publishFormat id="3E6AA359-3A3C-4827-B709-9977BDDDACCB">0</publishFormat>
     <publishFormat id="BBC1F406-65F2-4219-9304-FA48C7549E44">0</publishFormat>
     <publishFormat id="BBC1F806-66F2-4339-9306-FA48C7549E59">0</publishFormat>
@@ -39,12 +39,12 @@
     <VersionInfo>23,0,0,0;21,0,0,0;20,0,0,0;19,0,0,0;18,0,0,0;17,0,0,0;16,0,0,0;14,0,0,0;13,0,0,0;12,0,0,0;11,9,0,0;11,8,0,0;11,7,0,0;11,6,0,0;11,5,0,0;11,4,0,0;11,3,0,0;11,2,0,0;11,1,0,0;10,3,0,0;10,2,153,0;10,1,52,0;9,0,124,0;8,0,24,0;7,0,14,0;6,0,79,0;5,0,58,0;4,0,32,0;3,0,8,0;2,0,1,12;1,0,0,1;</VersionInfo>
     <UsingDefaultContentFilename>1</UsingDefaultContentFilename>
     <UsingDefaultAlternateFilename>1</UsingDefaultAlternateFilename>
-    <ContentFilename>chessdemo2_content.html</ContentFilename>
-    <AlternateFilename>chessdemo2_alternate.html</AlternateFilename>
+    <ContentFilename>grad_content.html</ContentFilename>
+    <AlternateFilename>grad_alternate.html</AlternateFilename>
     <UsingOwnAlternateFile>0</UsingOwnAlternateFile>
     <OwnAlternateFilename></OwnAlternateFilename>
-    <Width>400</Width>
-    <Height>600</Height>
+    <Width>550</Width>
+    <Height>400</Height>
     <Align>0</Align>
     <Units>0</Units>
     <Loop>1</Loop>
@@ -116,8 +116,8 @@
     <TelemetryPassword></TelemetryPassword>
   </PublishFlashProperties>
   <PublishJpegProperties enabled="true">
-    <Width>400</Width>
-    <Height>600</Height>
+    <Width>550</Width>
+    <Height>400</Height>
     <Progressive>0</Progressive>
     <DPI>4718592</DPI>
     <Size>0</Size>
@@ -125,8 +125,8 @@
     <MatchMovieDim>1</MatchMovieDim>
   </PublishJpegProperties>
   <PublishGifProperties enabled="true">
-    <Width>400</Width>
-    <Height>600</Height>
+    <Width>550</Width>
+    <Height>400</Height>
     <Animated>0</Animated>
     <MatchMovieDim>1</MatchMovieDim>
     <Loop>1</Loop>
@@ -135,16 +135,16 @@
     <MaxColors>255</MaxColors>
   </PublishGifProperties>
   <PublishPNGProperties enabled="true">
-    <Width>400</Width>
-    <Height>600</Height>
+    <Width>550</Width>
+    <Height>400</Height>
     <MatchMovieDim>1</MatchMovieDim>
     <Smooth>1</Smooth>
     <BitDepth>24-bit with Alpha</BitDepth>
     <MaxColors>255</MaxColors>
   </PublishPNGProperties>
   <PublishOamProperties enabled="true">
-    <Width>400</Width>
-    <Height>600</Height>
+    <Width>550</Width>
+    <Height>400</Height>
     <CurrentFramePNG>1</CurrentFramePNG>
     <CustomPNG>0</CustomPNG>
     <PNGFilePath></PNGFilePath>
@@ -152,7 +152,7 @@
   </PublishOamProperties>
   <PublishProperties id="3E6AA359-3A3C-4827-B709-9977BDDDACCB" name="SWF Archive" otf="true" enabled="true">
     <Property name="default">true</Property>
-    <Property name="filename">chessdemo2.zip</Property>
+    <Property name="filename">grad.zip</Property>
   </PublishProperties>
   <PublishProperties id="BBC1F406-65F2-4219-9304-FA48C7549E44" name="SVG Image" otf="true" enabled="true">
     <Property name="copy">true</Property>

@@ -218,6 +218,38 @@ org.xfltools.xfldom.DOMXMLNodeName.POINT = "Point";
 
 
 /**
+ * @export
+ * @const
+ * @type {string}
+ */
+org.xfltools.xfldom.DOMXMLNodeName.SOLID_COLOR = "SolidColor";
+
+
+/**
+ * @export
+ * @const
+ * @type {string}
+ */
+org.xfltools.xfldom.DOMXMLNodeName.LINEAR_GRADIENT = "LinearGradient";
+
+
+/**
+ * @export
+ * @const
+ * @type {string}
+ */
+org.xfltools.xfldom.DOMXMLNodeName.RADIAL_GRADIENT = "RadialGradient";
+
+
+/**
+ * @export
+ * @const
+ * @type {string}
+ */
+org.xfltools.xfldom.DOMXMLNodeName.GRADIENT_ENTRY = "GradientEntry";
+
+
+/**
  * Metadata
  *
  * @type {Object.<string, Array.<Object>>}

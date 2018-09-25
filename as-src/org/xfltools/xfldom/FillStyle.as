@@ -1,9 +1,12 @@
 package org.xfltools.xfldom 
 {
+	import flash.display.GradientType;
 	import flash.display.GraphicsSolidFill;
 	import flash.display.IGraphicsData;
 	
 	import org.xfltools.utils.XMLAssistant;
+	import flash.display.IGraphicsFill;
+	
 	/**
 	 * ...
 	 * @author Tim Diggle
@@ -11,7 +14,7 @@ package org.xfltools.xfldom
 	public class FillStyle implements IDOMComponent,IGraphicsDrawable
 	{
 		private var _index:int;
-		private var _solidColors:Vector.<SolidColor>;
+		private var _fillData:Vector.<IGraphicsDrawable>;
 		
 		public function FillStyle() 
 		{
@@ -22,25 +25,36 @@ package org.xfltools.xfldom
 		{
 			_index = parseInt(xml.@index);
 			
-			_solidColors = new Vector.<SolidColor>();
+			_fillData = new Vector.<IGraphicsDrawable>();
 			
-			for each (var solidColorXML:XML in XMLAssistant.getChildList(xml, ["SolidColor"]))
+			for each (var solidColorXML:XML in XMLAssistant.getChildList(xml, [DOMXMLNodeName.SOLID_COLOR]))
 			{
 				var solidColor:SolidColor = new SolidColor();
 				solidColor.fromXML(solidColorXML);
 				
-				_solidColors.push(solidColor);
+				_fillData.push(solidColor);
+			}
+			
+			for each (var linearGradientXML:XML in XMLAssistant.getChildList(xml, [DOMXMLNodeName.LINEAR_GRADIENT]))
+			{
+				var linearGradient:Gradient = new Gradient(GradientType.LINEAR);
+				linearGradient.fromXML(linearGradientXML);
+				
+				_fillData.push(linearGradient);
+			}
+			
+			for each (var radialGradientXML:XML in XMLAssistant.getChildList(xml, [DOMXMLNodeName.RADIAL_GRADIENT]))
+			{
+				var radialGradient:Gradient = new Gradient(GradientType.RADIAL);
+				radialGradient.fromXML(radialGradientXML);
+				
+				_fillData.push(radialGradient);
 			}
 		}
 		
-		public function get solidFill():GraphicsSolidFill
+		public function get fill():IGraphicsFill
 		{
-			if (_solidColors.length)
-			{
-				return new GraphicsSolidFill(_solidColors[0].color, _solidColors[0].alpha);
-			}
-			
-			return null;
+			return _fillData[0].toGraphicsData()[0] as IGraphicsFill;
 		}
 		
 		public function get index():int
@@ -50,13 +64,11 @@ package org.xfltools.xfldom
 		
 		public function toGraphicsData():Vector.<IGraphicsData>
 		{
-			var graphicsData:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();;
+			var graphicsData:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();
 			
-			for each (var solidColor:SolidColor in _solidColors)
+			for each (var fillData:IGraphicsDrawable in _fillData)
 			{
-				var solidFill:GraphicsSolidFill = new GraphicsSolidFill(solidColor.color, solidColor.alpha);
-				
-				graphicsData.push(solidFill);
+				graphicsData = graphicsData.concat(fillData.toGraphicsData());
 			}
 			
 			return graphicsData;

@@ -123,11 +123,11 @@ flash.display.Graphics.prototype.beginGradientFill = function(type, colors, alph
   switch (type) {
     case flash.display.GradientType.LINEAR:
       matrix.cacheCjsLinearGradientValues();
-      this._javascriptImplementation.beginLinearGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1);
+      this._javascriptImplementation.graphics.beginLinearGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1);
       break;
     case flash.display.GradientType.RADIAL:
       matrix.cacheCjsRadialGradientValues();
-      this._javascriptImplementation.beginRadialGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillRadius0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1, matrix.cjsGradientFillRadius1);
+      this._javascriptImplementation.graphics.beginRadialGradientFill(colorStrings, ratios, matrix.cjsGradientFillX0, matrix.cjsGradientFillY0, matrix.cjsGradientFillRadius0, matrix.cjsGradientFillX1, matrix.cjsGradientFillY1, matrix.cjsGradientFillRadius1);
       break;
     default:
       break;

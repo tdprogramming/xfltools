@@ -12,6 +12,7 @@ goog.require('flash.display.GraphicsEndFill');
 goog.require('flash.net.URLRequest');
 goog.require('flash.system.LoaderContext');
 goog.require('flash.accessibility.AccessibilityImplementation');
+goog.require('org.xfltools.xfldom.Gradient');
 goog.require('org.apache.royale.utils.OSUtils');
 goog.require('flash.display.GraphicsTrianglePath');
 goog.require('org.apache.royale.utils.MXMLDataInterpreter');
@@ -138,6 +139,7 @@ goog.require('org.xfltools.commands.CommandQueue');
 goog.require('org.apache.royale.html.beads.DataGridColumnChangePropagator');
 goog.require('org.xfltools.xfldom.TimeMap');
 goog.require('org.apache.royale.html.beads.layouts.ButtonBarLayout');
+goog.require('org.xfltools.xfldom.GradientEntry');
 goog.require('org.apache.royale.events.ItemRemovedEvent');
 goog.require('org.apache.royale.html.supportClasses.DataGridColumn');
 goog.require('flash.geom.Vector3D');
@@ -237,7 +239,7 @@ XFLTools.prototype.initApp = function() {
   var /** @type {flash.display.Sprite} */ sprite = new flash.display.Sprite();
   org.xfltools.core.ApplicationFactory.createApplication(sprite, 400, 600);
   var /** @type {flash.display.Loader} */ loader = new flash.display.Loader();
-  loader.load(new flash.net.URLRequest("http://www.tdprogramming.com/demos/xfltools_staging/xfls/chessdemo2.xfl"));
+  loader.load(new flash.net.URLRequest("xfls/chessdemo.xfl"));
   sprite.addChild(loader);
 };
 

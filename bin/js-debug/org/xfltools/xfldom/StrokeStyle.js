@@ -8,7 +8,7 @@
  */
 
 goog.provide('org.xfltools.xfldom.StrokeStyle');
-/* Royale Dependency List: XML,flash.display.GraphicsSolidFill,flash.display.GraphicsStroke,flash.display.IGraphicsData,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.FillStyle*/
+/* Royale Dependency List: XML,flash.display.GraphicsStroke,flash.display.IGraphicsData,flash.display.IGraphicsFill,org.xfltools.utils.XMLAssistant,org.xfltools.xfldom.FillStyle*/
 
 goog.require('org.xfltools.xfldom.IDOMComponent');
 goog.require('org.xfltools.xfldom.IGraphicsDrawable');
@@ -115,7 +115,7 @@ org.xfltools.xfldom.StrokeStyle.prototype.fromXML = function(xml) {
  */
 org.xfltools.xfldom.StrokeStyle.prototype.toGraphicsData = function() {
   var /** @type {Array} */ graphicsData = org.apache.royale.utils.Language.Vector();
-  var /** @type {flash.display.GraphicsSolidFill} */ fill = this._fill ? this._fill.solidFill : null;
+  var /** @type {flash.display.IGraphicsFill} */ fill = this._fill ? this._fill.fill : null;
   var /** @type {flash.display.GraphicsStroke} */ stroke = new flash.display.GraphicsStroke(this._thickness, this._pixelHinting, this._scaleMode, this._caps, this._joints, this._miterLimit, fill);
   graphicsData.push(stroke);
   return graphicsData;

@@ -3,6 +3,7 @@ package org.xfltools.xfldom
 	import flash.display.GraphicsSolidFill;
 	import flash.display.GraphicsStroke;
 	import flash.display.IGraphicsData;
+	import flash.display.IGraphicsFill;
 	import org.xfltools.utils.XMLAssistant;
 	
 	/**
@@ -59,7 +60,7 @@ package org.xfltools.xfldom
 		{
 			var graphicsData:Vector.<IGraphicsData> = new Vector.<IGraphicsData>();
 			
-			var fill:GraphicsSolidFill = _fill ? _fill.solidFill : null;
+			var fill:IGraphicsFill = _fill ? _fill.fill : null;
 			
 			var stroke:GraphicsStroke = new GraphicsStroke(_thickness, _pixelHinting, _scaleMode, _caps, _joints, _miterLimit, fill);
 				
@@ -68,5 +69,4 @@ package org.xfltools.xfldom
 			return graphicsData;
 		}
 	}
-
 }
