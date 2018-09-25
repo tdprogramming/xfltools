@@ -79,8 +79,6 @@ org.xfltools.core.ApplicationFactory.createApplication = function(mainInstance, 
   org.xfltools.core.ApplicationFactory.jsStage.addEventListener("mouseout", org.xfltools.core.ApplicationFactory.onStageMouseOut);
   org.xfltools.core.ApplicationFactory.jsStage.addEventListener("mouseover", org.xfltools.core.ApplicationFactory.onStageMouseOver);
   org.xfltools.core.ApplicationFactory.jsStage.addEventListener("mousemove", org.xfltools.core.ApplicationFactory.onStageMouseMove);
-  org.xfltools.core.ApplicationFactory.jsStage.addEventListener("mousemove", org.xfltools.core.ApplicationFactory.onStageMouseMove);
-  org.xfltools.core.ApplicationFactory.jsStage.addEventListener("mousemove", org.xfltools.core.ApplicationFactory.onStageMouseMove);
   org.xfltools.core.ApplicationFactory.stage = org.apache.royale.utils.Language.as(mainInstance, flash.display.Stage);
   window["getCreateJSTicker"]().framerate = framerate;
 };

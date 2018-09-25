@@ -86,7 +86,7 @@ flash.display.Graphics.alphaStringFromUint = function(alpha) {
  */
 flash.display.Graphics.prototype.beginFill = function(color, alpha) {
   alpha = typeof alpha !== 'undefined' ? alpha : 1.0;
-  this._javascriptImplementation.graphics.beginFill(flash.display.Graphics.colorStringFromUint(color));
+  this._javascriptImplementation.graphics.beginFill(flash.display.Graphics.colorStringFromUint(color) + flash.display.Graphics.alphaStringFromUint(alpha));
 };
 
 

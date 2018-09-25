@@ -96,7 +96,7 @@ org.xfltools.xfldom.SolidColor.prototype.ROYALE_REFLECTION_INFO = function () {
     accessors: function () {
       return {
         'color': { type: 'uint', access: 'readonly', declaredBy: 'org.xfltools.xfldom.SolidColor'},
-        'alpha': { type: 'uint', access: 'readonly', declaredBy: 'org.xfltools.xfldom.SolidColor'}
+        'alpha': { type: 'Number', access: 'readonly', declaredBy: 'org.xfltools.xfldom.SolidColor'}
       };
     },
     methods: function () {

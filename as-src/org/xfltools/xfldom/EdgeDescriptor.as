@@ -35,12 +35,37 @@ package org.xfltools.xfldom
 				_start = spaceSeparatedStringToPoint(splitDescriptor[0]);
 				_control = spaceSeparatedStringToPoint(splitDescriptor[1]);
 				_end = spaceSeparatedStringToPoint(splitDescriptor[1], 2);
-			}	
+			}
+		}
+		
+		private function removeIllegalCharacters(input:String):String
+		{
+			var result:String = "";
+			
+			for (var i:int = 0; i < input.length; i++)
+			{
+				var suspectChar:String = input.charAt(i);
+			
+				if (suspectChar != "\r" && suspectChar != "\n" && suspectChar != "\r\n" && suspectChar != " ")
+				{
+					result += suspectChar;
+				}
+			}
+			
+			return result;
 		}
 		
 		private function spaceSeparatedStringToPoint(descriptorString:String, offset:int = 0):Point
 		{
 			var splitDescriptor:Array = descriptorString.split(" ");
+			
+			for (var i:int = splitDescriptor.length - 1; i >= 0; i--)
+			{
+				if (removeIllegalCharacters(splitDescriptor[i]) == "")
+				{
+					splitDescriptor.splice(i, 1);
+				}
+			}
 			
 			var result:Point = new Point(parseDorHFloat(splitDescriptor[0 + offset]) / TWIPS.TWIPS_PER_PIXEL, parseDorHFloat(splitDescriptor[1 + offset]) / TWIPS.TWIPS_PER_PIXEL);
 			
@@ -57,9 +82,17 @@ package org.xfltools.xfldom
 		 */
 		private function parseDorHFloat(input:String):Number
 		{
+			input = removeIllegalCharacters(input);
+		
+			if (input.lastIndexOf("S") != -1)
+			{
+				input = input.split("S")[0];
+			} 
+		
+			var result:Number;
+				
 			if (input.charAt(0) == "#")
 			{
-				var result:Number;
 				
 				input = input.substr(1);
 				

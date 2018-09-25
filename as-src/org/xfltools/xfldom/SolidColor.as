@@ -7,7 +7,7 @@ package org.xfltools.xfldom
 	public class SolidColor implements IDOMComponent
 	{
 		private var _color:uint = 0;
-		private var _alpha:uint = 1;
+		private var _alpha:Number = 1;
 		
 		public function SolidColor() 
 		{
@@ -25,7 +25,7 @@ package org.xfltools.xfldom
 			return _color;
 		}
 		
-		public function get alpha():uint
+		public function get alpha():Number
 		{
 			return _alpha;
 		}

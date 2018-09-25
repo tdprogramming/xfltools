@@ -61,18 +61,35 @@ org.xfltools.xfldom.Edge.prototype.fromXML = function(xml) {
   this._edgeDescriptors = org.apache.royale.utils.Language.Vector();
   if (xml.hasOwnProperty("@edges")) {
     var /** @type {Array} */ edgeDescriptors = xml.attribute('edges').toString().split("!");
-    edgeDescriptors.shift();
     var foreachiter0_target = edgeDescriptors;
     for (var foreachiter0 in foreachiter0_target) 
     {
     var descriptor = foreachiter0_target[foreachiter0];
     {
-      if (descriptor != "") {
+      if (!this.isStringEmpty(descriptor)) {
         this._edgeDescriptors.push(new org.xfltools.xfldom.EdgeDescriptor(descriptor, this._strokeStyle, this._fillStyle));
       }
     }}
     
   }
+};
+
+
+/**
+ * @private
+ * @param {string} input
+ * @return {boolean}
+ */
+org.xfltools.xfldom.Edge.prototype.isStringEmpty = function(input) {
+  if (input.length == 0) {
+    return true;
+  }
+  for (var /** @type {number} */ i = 0; i < input.length; i++) {
+    if (input.charAt(i) != " " && input.charAt(i) != "\n" && input.charAt(i) != "\r" && input.charAt(i) != "\r\n") {
+      return false;
+    }
+  }
+  return true;
 };
 
 

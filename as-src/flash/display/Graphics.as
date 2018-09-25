@@ -53,7 +53,7 @@ package flash.display
 
 		public function beginFill(color:uint, alpha:Number = 1.0):void
 		{
-			_javascriptImplementation.graphics.beginFill(Graphics.colorStringFromUint(color));
+			_javascriptImplementation.graphics.beginFill(Graphics.colorStringFromUint(color) + Graphics.alphaStringFromUint(alpha));
 		}
 
 		public function beginGradientFill(type:String, colors:Array, alphas:Array, ratios:Array, matrix:Matrix = null, spreadMethod:String = "pad", interpolationMethod:String = "rgb", focalPointRatio:Number = 0):void

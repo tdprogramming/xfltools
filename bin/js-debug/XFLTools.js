@@ -237,7 +237,7 @@ XFLTools.prototype.initApp = function() {
   var /** @type {flash.display.Sprite} */ sprite = new flash.display.Sprite();
   org.xfltools.core.ApplicationFactory.createApplication(sprite, 400, 600);
   var /** @type {flash.display.Loader} */ loader = new flash.display.Loader();
-  loader.load(new flash.net.URLRequest("xfls/chessdemo.xfl"));
+  loader.load(new flash.net.URLRequest("http://www.tdprogramming.com/demos/xfltools_staging/xfls/chessdemo2.xfl"));
   sprite.addChild(loader);
 };
 

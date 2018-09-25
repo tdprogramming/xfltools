@@ -7,6 +7,7 @@ package org.xfltools.xfldom
 	import flash.display.GraphicsStroke;
 	import flash.display.IGraphicsData;
 	import flash.geom.Point;
+	
 	/**
 	 * ...
 	 * @author Tim Diggle
@@ -31,16 +32,33 @@ package org.xfltools.xfldom
 			if (xml.hasOwnProperty("@edges"))
 			{			
 				var edgeDescriptors:Array = (xml.@edges.toString()).split("!");
-				edgeDescriptors.shift();
 				
 				for each (var descriptor:String in edgeDescriptors)
 				{
-					if (descriptor != "")
+					if (!isStringEmpty(descriptor))
 					{
 						_edgeDescriptors.push(new EdgeDescriptor(descriptor, _strokeStyle, _fillStyle));
 					}
 				}
 			}
+		}
+		
+		private function isStringEmpty(input:String):Boolean
+		{
+			if (input.length == 0)
+			{
+				return true;
+			}
+		
+			for (var i:int = 0; i < input.length; i++)
+			{
+				if (input.charAt(i) != " " && input.charAt(i) != "\n" && input.charAt(i) != "\r" && input.charAt(i) != "\r\n")
+				{
+					return false;
+				} 
+			}
+			
+			return true;
 		}
 		
 		public function reverse():void

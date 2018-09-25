@@ -21,8 +21,6 @@ package org.xfltools.core
 	            
             // For createjs, the application is the same as the canvas
 			// and it provides convenient access to the stage.
-                                    
-            
             
             jsStage = window["getCreateJSStage"]('createJSCanvas');
 
@@ -43,9 +41,7 @@ package org.xfltools.core
 			jsStage.addEventListener("mouseout", onStageMouseOut);
 			jsStage.addEventListener("mouseover", onStageMouseOver);
 			jsStage.addEventListener("mousemove", onStageMouseMove);
-			jsStage.addEventListener("mousemove", onStageMouseMove);
-			jsStage.addEventListener("mousemove", onStageMouseMove);
-		    
+			
 		    stage = mainInstance as flash.display.Stage;
 
 		    window["getCreateJSTicker"]().framerate= framerate;		// The tick (enter frame) event is only dispatched to objects on stage, needs to go to every event dispatcher''

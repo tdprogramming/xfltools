@@ -94,7 +94,7 @@ org.xfltools.xfldom.DOMShape.prototype.fromXML = function(xml) {
     var /** @type {number} */ fillStyleLeft = parseInt(edgeXML.attribute('fillStyle0'), undefined);
     var /** @type {number} */ fillStyleRight = parseInt(edgeXML.attribute('fillStyle1'), undefined);
     var /** @type {number} */ strokeStyleIndex = parseInt(edgeXML.attribute('strokeStyle'), undefined);
-    if (!strokeStyleIndex && !lastFillStyleLeft && !fillStyleRight) {
+    if (!strokeStyleIndex && !fillStyleLeft && !fillStyleRight) {
       strokeStyleIndex = lastStrokeStyle;
       fillStyleLeft = lastFillStyleLeft;
       fillStyleRight = lastFillStyleRight;
@@ -168,7 +168,7 @@ org.xfltools.xfldom.DOMShape.prototype.sortFillsFirst = function(edgeDescriptorA
 org.xfltools.xfldom.DOMShape.prototype.findFriendEdges = function(theseEdges, allEdges) {
   var /** @type {boolean} */ friendFound = false;
   for (var /** @type {number} */ i = 0; i < allEdges.length; i++) {
-    if (allEdges[i].strokeStyle == theseEdges[0].strokeStyle && allEdges[i].fillStyle == theseEdges[0].fillStyle) {
+    if (allEdges[i].strokeStyle == theseEdges[0].strokeStyle && allEdges[i].fillStyle != 0 && allEdges[i].fillStyle == theseEdges[0].fillStyle) {
       if (allEdges[i].start.equals(theseEdges[theseEdges.length - 1].end)) {
         theseEdges.push(allEdges.splice(i, 1)[0]);
         friendFound = true;
@@ -242,7 +242,8 @@ org.xfltools.xfldom.DOMShape.prototype.toGraphicsData = function() {
     if (edgeSet[0].strokeStyle > 0) {
       var /** @type {org.xfltools.xfldom.StrokeStyle} */ strokeStyle = this.strokeStyleFromIndex(edgeSet[0].strokeStyle);
       graphicsData = graphicsData.concat(strokeStyle.toGraphicsData());
-    } else if (edgeSet[0].fillStyle > 0) {
+    }
+    if (edgeSet[0].fillStyle > 0) {
       var /** @type {org.xfltools.xfldom.FillStyle} */ fillStyle = this.fillStyleFromIndex(edgeSet[0].fillStyle);
       graphicsData = graphicsData.concat(fillStyle.toGraphicsData());
     }
@@ -250,6 +251,7 @@ org.xfltools.xfldom.DOMShape.prototype.toGraphicsData = function() {
     pathCommands = org.apache.royale.utils.Language.Vector();
     pathCommands[0] = flash.display.GraphicsPathCommand.MOVE_TO;
     pathCoordinates.push(edgeSet[0].start.x, edgeSet[0].start.y);
+    var /** @type {org.xfltools.xfldom.EdgeDescriptor} */ lastEdgeDescriptor;
     var foreachiter7_target = edgeSet;
     for (var foreachiter7 in foreachiter7_target) 
     {
@@ -262,6 +264,7 @@ org.xfltools.xfldom.DOMShape.prototype.toGraphicsData = function() {
         pathCommands.push(flash.display.GraphicsPathCommand.LINE_TO);
         pathCoordinates.push(edgeDescriptor.end.x, edgeDescriptor.end.y);
       }
+      lastEdgeDescriptor = edgeDescriptor;
     }}
     
     var /** @type {flash.display.GraphicsPath} */ graphicsPath = new flash.display.GraphicsPath(pathCommands, pathCoordinates);

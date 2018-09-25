@@ -79,6 +79,23 @@ org.xfltools.xfldom.EdgeDescriptor.prototype._strokeStyle = 0;
 
 /**
  * @private
+ * @param {string} input
+ * @return {string}
+ */
+org.xfltools.xfldom.EdgeDescriptor.prototype.removeIllegalCharacters = function(input) {
+  var /** @type {string} */ result = "";
+  for (var /** @type {number} */ i = 0; i < input.length; i++) {
+    var /** @type {string} */ suspectChar = input.charAt(i);
+    if (suspectChar != "\r" && suspectChar != "\n" && suspectChar != "\r\n" && suspectChar != " ") {
+      result += suspectChar;
+    }
+  }
+  return result;
+};
+
+
+/**
+ * @private
  * @param {string} descriptorString
  * @param {number=} offset
  * @return {flash.geom.Point}
@@ -86,6 +103,11 @@ org.xfltools.xfldom.EdgeDescriptor.prototype._strokeStyle = 0;
 org.xfltools.xfldom.EdgeDescriptor.prototype.spaceSeparatedStringToPoint = function(descriptorString, offset) {
   offset = typeof offset !== 'undefined' ? offset : 0;
   var /** @type {Array} */ splitDescriptor = descriptorString.split(" ");
+  for (var /** @type {number} */ i = splitDescriptor.length - 1; i >= 0; i--) {
+    if (this.removeIllegalCharacters(splitDescriptor[i]) == "") {
+      splitDescriptor.splice(i, 1);
+    }
+  }
   var /** @type {flash.geom.Point} */ result = new flash.geom.Point(this.parseDorHFloat(splitDescriptor[0 + offset]) / org.xfltools.utils.TWIPS.TWIPS_PER_PIXEL, this.parseDorHFloat(splitDescriptor[1 + offset]) / org.xfltools.utils.TWIPS.TWIPS_PER_PIXEL);
   return result;
 };
@@ -103,8 +125,12 @@ org.xfltools.xfldom.EdgeDescriptor.prototype.spaceSeparatedStringToPoint = funct
  * @return {number}
  */
 org.xfltools.xfldom.EdgeDescriptor.prototype.parseDorHFloat = function(input) {
+  input = this.removeIllegalCharacters(input);
+  if (input.lastIndexOf("S") != -1) {
+    input = org.apache.royale.utils.Language.string(input.split("S")[0]);
+  }
+  var /** @type {number} */ result;
   if (input.charAt(0) == "#") {
-    var /** @type {number} */ result;
     input = input.substr(1);
     if (input.lastIndexOf(".") == -1) {
       result = parseFloat("0x" + input);

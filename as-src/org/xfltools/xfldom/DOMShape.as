@@ -61,7 +61,7 @@ package org.xfltools.xfldom
 				
 				var strokeStyleIndex:int = parseInt(edgeXML.@strokeStyle);
 				
-				if (!strokeStyleIndex && !lastFillStyleLeft && !fillStyleRight)
+				if (!strokeStyleIndex && !fillStyleLeft && !fillStyleRight)
 				{
 					strokeStyleIndex = lastStrokeStyle;
 					fillStyleLeft = lastFillStyleLeft;
@@ -135,7 +135,7 @@ package org.xfltools.xfldom
 			
 			for (var i:int = 0; i < allEdges.length; i++)
 			{
-				if (allEdges[i].strokeStyle == theseEdges[0].strokeStyle && allEdges[i].fillStyle == theseEdges[0].fillStyle)
+				if (allEdges[i].strokeStyle == theseEdges[0].strokeStyle && allEdges[i].fillStyle != 0 && allEdges[i].fillStyle == theseEdges[0].fillStyle)
 				{
 					if (allEdges[i].start.equals(theseEdges[theseEdges.length - 1].end))
 					{
@@ -201,19 +201,22 @@ package org.xfltools.xfldom
 					graphicsData = graphicsData.concat(strokeStyle.toGraphicsData());
 				}
 				
-				else if (edgeSet[0].fillStyle > 0)
+				if (edgeSet[0].fillStyle > 0)
 				{
 					var fillStyle:FillStyle = fillStyleFromIndex(edgeSet[0].fillStyle);
 						
 					graphicsData = graphicsData.concat(fillStyle.toGraphicsData());
-					
 				}
+				
+				//trace("New Shape");
 				
 				pathCoordinates = new Vector.<Number>();
 				pathCommands = new Vector.<int>();
 					
 				pathCommands[0] = GraphicsPathCommand.MOVE_TO;
 				pathCoordinates.push(edgeSet[0].start.x, edgeSet[0].start.y);
+				
+				var lastEdgeDescriptor:EdgeDescriptor;
 				
 				for each (var edgeDescriptor:EdgeDescriptor in edgeSet)
 				{
@@ -227,6 +230,8 @@ package org.xfltools.xfldom
 						pathCommands.push(GraphicsPathCommand.LINE_TO);
 						pathCoordinates.push(edgeDescriptor.end.x, edgeDescriptor.end.y);
 					}
+					
+					lastEdgeDescriptor = edgeDescriptor;
 				}
 				
 				var graphicsPath:GraphicsPath = new GraphicsPath(pathCommands, pathCoordinates);
